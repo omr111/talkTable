@@ -68,6 +68,8 @@
     <Compile Include="Entities\talkTableContext.cs" />
     <Compile Include="Entities\talkTableTeam.cs" />
     <Compile Include="Entities\teamMember.cs" />
+    <Compile Include="Entities\usingArea.cs" />
+    <Compile Include="Entities\usingAreaPicture.cs" />
     <Compile Include="Entities\validity.cs" />
     <Compile Include="Entities\validitySection.cs" />
     <Compile Include="Entities\whatIsAdvantage.cs" />

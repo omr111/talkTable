@@ -21,10 +21,10 @@ namespace talkTable.Entities.Entities
         [StringLength(50)]
         public string advantageCaption { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string advantagePictureUrl { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string pictureAlt { get; set; }
 
         public int? whatIsAdvantageId { get; set; }

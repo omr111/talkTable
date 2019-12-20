@@ -1,0 +1,149 @@
+﻿
+@{
+                /**/
+
+                /**/
+
+                ViewBag.Title = "Kullanım Alanları";
+                Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+@using talkTable.Entities.Entities
+@model List<areaInfo>
+
+
+<div id="productUpdateError">
+    @if (TempData["serviceUpdateError"] != null)
+    {
+
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+
+                <span class="badge badge-pill badge-success">Hata</span> @TempData["serviceUpdateError"].ToString()
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+
+
+    }
+    <script type="text/javascript">
+        setTimeout(function () { $('#serviceUpdateError').hide('slow'); }, 5000);
+    </script>
+</div>
+<div class="info"></div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Kullanım Alanları</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-xs-6 col-sm-6" style="margin-top: 20px">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+
+                                    <div class="pull-right">
+                                        <span class="clickable filter" data-toggle="tooltip" title="Arama Yap" data-container="body">
+                                            <i class="glyphicon glyphicon-filter"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Arama..." />
+                                </div>
+                                <table id="task-table" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                           
+                                            <th>Açıklama</th>
+                                            
+                                            <th>Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (areaInfo info in Model)
+                                        {
+                                            <tr>
+                                                <td>@info.areaInfoText</td>                                          
+
+                                                <td><button type="submit" data-id="@info.id" class="btn btn-danger deleteService"><i class="fa fa-trash"></i></button></td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div>
+@section js{
+    <script type="text/javascript">
+        function infoMessageFail(msg) {
+            var okFail = '<div class="col-sm-12">';
+            okFail += '<div class="alert  alert-danger alert-dismissible fade show" role="alert">';
+            okFail += ' <span class="badge badge-pill badge-success">Hata</span> ' + msg;
+            okFail += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            okFail += '<span aria-hidden="true">&times;</span>';
+            okFail += '</button>';
+            okFail += '</div>';
+            okFail += ' </div>';
+            return okFail;
+        }
+        function infoMessageOK(msg) {
+            var ok = '<div class="col-sm-12">';
+            ok += '<div class="alert  alert-success alert-dismissible fade show" role="alert">';
+            ok += ' <span class="badge badge-pill badge-success">Başarılı</span> ' + msg;
+            ok += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            ok += '<span aria-hidden="true">&times;</span>';
+            ok += '</button>';
+            ok += '</div>';
+            ok += ' </div>';
+            return ok;
+        }
+        $(".deleteService").click(function () {
+            var serviceId = $(this).data("id");
+            var findTR = $(this).closest("tr");
+            $.ajax({
+                url: "/AdminPanel/service/serviceDelete",
+                type: "POST",
+                data: { id: serviceId },
+                success: function (data) {
+                    if (data == 1) {
+                        findTR.fadeOut(1000, function () {
+                            findTR.remove();
+                        });
+
+                        $(".info").html(infoMessageOK(" Service Başarıyla Silindi."));
+                        setTimeout(function () { $('.info').hide('slow'); }, 5000);
+
+                    } else {
+                        infoMessageFail(" Service Silme Sırasında Bir Hata Meydana Geldi!");
+
+                        setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                    }
+                },
+                error: function () {
+                    infoMessageFail(" Service Silme Sırasında Bir Hata Meydana Geldi!");
+
+                    setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                }
+            });
+
+        });
+    </script>
+}
+
+
+
+
+

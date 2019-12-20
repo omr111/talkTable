@@ -20,10 +20,10 @@ namespace talkTable.Entities.Entities
         public string job { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(150)]
         public string picturePath { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string pictureAlt { get; set; }
 
         public int? talkTableTeamId { get; set; }

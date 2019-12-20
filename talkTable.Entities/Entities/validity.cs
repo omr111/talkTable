@@ -25,10 +25,10 @@ namespace talkTable.Entities.Entities
         [StringLength(250)]
         public string infoText { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string validityPicturePath { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string pictureAlt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

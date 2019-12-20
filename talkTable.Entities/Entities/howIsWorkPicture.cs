@@ -11,10 +11,10 @@ namespace talkTable.Entities.Entities
     {
         public int id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string picturePath { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string pictureAlt { get; set; }
 
         public int? howIsWorkId { get; set; }

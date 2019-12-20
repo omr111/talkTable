@@ -65,9 +65,11 @@
     <Compile Include="Abstract\IsiteInformationDal.cs" />
     <Compile Include="Abstract\ItalkTableTeamDal.cs" />
     <Compile Include="Abstract\IteamMemberDal.cs" />
+    <Compile Include="Abstract\IusingAreaDal.cs" />
     <Compile Include="Abstract\IvalidityDal.cs" />
     <Compile Include="Abstract\IvaliditySectionDal.cs" />
     <Compile Include="Abstract\IwhatIsAdvantageDal.cs" />
+    <Compile Include="Abstract\IusingAreaPictureDal.cs" />
     <Compile Include="Concrete\advantageDal.cs" />
     <Compile Include="Concrete\advantageLineDal.cs" />
     <Compile Include="Concrete\areaInfoDal.cs" />
@@ -82,6 +84,8 @@
     <Compile Include="Concrete\siteInformationDal.cs" />
     <Compile Include="Concrete\talkTableTeamDal.cs" />
     <Compile Include="Concrete\teamMemberDal.cs" />
+    <Compile Include="Concrete\usingAreaDal.cs" />
+    <Compile Include="Concrete\usingAreaPictureDal.cs" />
     <Compile Include="Concrete\validityDal.cs" />
     <Compile Include="Concrete\validitySectionDal.cs" />
     <Compile Include="Concrete\whatIsAdvantageDal.cs" />

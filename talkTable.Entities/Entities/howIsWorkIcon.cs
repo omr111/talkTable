@@ -11,10 +11,10 @@ namespace talkTable.Entities.Entities
     {
         public int id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string iconPath { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string iconAlt { get; set; }
 
         [StringLength(50)]

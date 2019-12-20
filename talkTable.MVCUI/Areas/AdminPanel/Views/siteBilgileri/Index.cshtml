@@ -1,0 +1,141 @@
+﻿@using talkTable.Entities.Entities
+@model siteInformation
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+<form action="/AdminPanel/siteBilgileri/Index" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <h4 style="color:coral;margin-left:30px"> @Html.ValidationSummary(true)</h4>
+   
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>TalkTable</strong> <small> Site Bilgileri</small>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label class=" form-control-label">Site İsmi</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-male"></i></div>
+                                    <input class="form-control" required maxlength="100" value="@Model.siteName" name="siteName">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.siteName, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Site Bilgi Paragraf 1</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                    <textarea class="form-control" maxlength="500" name="whatIsThisSiteText1" style="overflow:scroll">@Model.whatIsThisSiteText1</textarea>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.whatIsThisSiteText1, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Site Bilgi Paragraf 2</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                    <textarea class="form-control" maxlength="500" name="whatIsThisSiteText2" style="overflow:scroll"> @Model.whatIsThisSiteText2 </textarea>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.whatIsThisSiteText2, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Logo</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-picture-o"></i></div>
+                                    <input type="file" name="file" class="form-control">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    <input class="form-control" required maxlength="70" name="emailAddress" value="@Model.emailAddress">
+                                </div>
+                                <small class="form-text text-muted">ex. iletisim@talktable.net</small>
+                                @Html.ValidationMessageFor(m => m.emailAddress, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Email Şifre</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                    <input class="form-control" type="password" required maxlength="15" name="emailPassword" value="@Model.emailPassword">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.emailPassword, "", new { @style = "color:red" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label class=" form-control-label">Telefon</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                    <input class="form-control" type="text" required maxlength="11" name="phone" value="@Model.phone">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.phone, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Facebook Link</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-facebook-f"></i></div>
+                                    <input class="form-control" type="text" required maxlength="100" name="faceUrl" value="@Model.faceUrl">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.faceUrl, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Twitter Link</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+                                    <input class="form-control" type="text" required maxlength="100" name="twitterUrl" value="@Model.twitterUrl">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.twitterUrl, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Instagram Link</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
+                                    <input class="form-control" type="text" required maxlength="100" name="instagramUrl" value="@Model.instagramUrl">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.instagramUrl, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Adres</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-address-card"></i></div>
+                                    <input class="form-control" type="text" required maxlength="200" name="address" value="@Model.address">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.address, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">İletişim Alanı Manşet</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <input class="form-control" type="text" required maxlength="50" name="sendMailCaption" value="@Model.sendMailCaption">
+                                </div>
+                                @Html.ValidationMessageFor(m => m.sendMailCaption, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">İletişim Alanı Alt Manşet</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <textarea class="form-control" type="text" required maxlength="250" name="sendMailSubText" style="overflow:scroll">@Model.sendMailSubText</textarea>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.sendMailSubText, "", new { @style = "color:red" })
+                            </div>
+                            <input type="submit" value="Kaydet" class="btn btn-success" style="float:right" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+    </form>

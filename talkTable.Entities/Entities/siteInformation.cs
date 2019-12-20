@@ -22,7 +22,7 @@ namespace talkTable.Entities.Entities
         [StringLength(500)]
         public string whatIsThisSiteText2 { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string logoPath { get; set; }
 
         [Required]

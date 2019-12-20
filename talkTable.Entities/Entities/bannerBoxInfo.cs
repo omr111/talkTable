@@ -11,7 +11,7 @@ namespace talkTable.Entities.Entities
     {
         public int id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string boxIconPath { get; set; }
 
         [Required]
@@ -22,7 +22,7 @@ namespace talkTable.Entities.Entities
         [StringLength(15)]
         public string boxOnButtonValue { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string IconAlt { get; set; }
 
         public int? bannerId { get; set; }

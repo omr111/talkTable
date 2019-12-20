@@ -16,5 +16,7 @@ namespace talkTable.Entities.Entities
         public string areaInfoText { get; set; }
 
         public int usingAreaId { get; set; }
+
+        public virtual usingArea usingArea { get; set; }
     }
 }

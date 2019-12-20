@@ -26,6 +26,8 @@ namespace talkTable.Entities.Entities
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<talkTableTeam> talkTableTeam { get; set; }
         public virtual DbSet<teamMember> teamMember { get; set; }
+        public virtual DbSet<usingArea> usingArea { get; set; }
+        public virtual DbSet<usingAreaPicture> usingAreaPicture { get; set; }
         public virtual DbSet<validity> validity { get; set; }
         public virtual DbSet<validitySection> validitySection { get; set; }
         public virtual DbSet<whatIsAdvantage> whatIsAdvantage { get; set; }
@@ -35,6 +37,16 @@ namespace talkTable.Entities.Entities
             modelBuilder.Entity<banner>()
                 .Property(e => e.onBannerText)
                 .IsFixedLength();
+
+            modelBuilder.Entity<usingArea>()
+                .HasMany(e => e.areaInfo)
+                .WithRequired(e => e.usingArea)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<usingArea>()
+                .HasMany(e => e.usingAreaPicture)
+                .WithRequired(e => e.usingArea)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<whatIsAdvantage>()
                 .HasMany(e => e.advantage)

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,8 @@
     <Compile Include="Abstract\IsiteInformationBll.cs" />
     <Compile Include="Abstract\ItalkTableTeamBll.cs" />
     <Compile Include="Abstract\IteamMemberBll.cs" />
+    <Compile Include="Abstract\IusingAreaBll.cs" />
+    <Compile Include="Abstract\IusingAreaPictureBll.cs" />
     <Compile Include="Abstract\IvalidityBll.cs" />
     <Compile Include="Abstract\IvaliditySectionBll.cs" />
     <Compile Include="Abstract\IwhatIsAdvantageBll.cs" />
@@ -70,6 +73,8 @@
     <Compile Include="Concrete\siteInformationBll.cs" />
     <Compile Include="Concrete\talkTableTeamBll.cs" />
     <Compile Include="Concrete\teamMemberBll.cs" />
+    <Compile Include="Concrete\usingAreaBll.cs" />
+    <Compile Include="Concrete\usingAreaPictureBll.cs" />
     <Compile Include="Concrete\validityBll.cs" />
     <Compile Include="Concrete\validitySectionBll.cs" />
     <Compile Include="Concrete\whatIsAdvantageBll.cs" />
@@ -79,6 +84,10 @@
     <ProjectReference Include="..\talkTable.Dal\talkTable.Dal.csproj">
       <Project>{96D0BB17-59DC-40DA-90B2-406D794AC59C}</Project>
       <Name>talkTable.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\talkTable.Entities\talkTable.Entities.csproj">
+      <Project>{422169BF-B9F9-43F8-985B-BA601C8BD5A5}</Project>
+      <Name>talkTable.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,7 +44,11 @@ namespace talkTable.Dal.Concrete
 
         public List<T> listAll(Expression<Func<T, bool>> filter = null)
         {
-            return ctx.Set<T>().Where(filter).ToList();
+            if (filter != null)
+            {
+                return ctx.Set<T>().Where(filter).ToList();
+            }
+            return ctx.Set<T>().ToList();
         }
 
         public bool Update(T entity)
