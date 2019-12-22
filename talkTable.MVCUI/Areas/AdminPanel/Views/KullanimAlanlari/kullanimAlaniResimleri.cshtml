@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "kullanimAlaniResimleri";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+@using talkTable.Entities.Entities
+@model List<usingAreaPicture>
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Resim Başarıyla Eklendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+        <h4 style="color:coral;margin-left:30px"> @Html.ValidationSummary(true)</h4>
+<div class="alert"></div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Resim Sil</strong>
+                    </div>
+                   
+
+                        <div class="card-body card-block ">
+                            <div class="form-group ">
+                                <label class=" form-control-label">Kullanım Alanı Resimleri</label>
+                                <div class="input-group" style="overflow: scroll; ">
+                                    <div class="input-group-addon "><i class="fa fa-image"></i></div>
+
+                                    @*<select id="selectedBanner" name="" class="vodiapicker form-control bannerId">*@
+
+                                    @if (@Model != null)
+                                    {
+
+                                        foreach (usingAreaPicture bann in @Model)
+                                        {
+                                            <div style="margin-left: 50px;" class="col-md-12">
+                                                <input name="id" type="radio" value="@bann.id" data-id="@bann.id" data-alt="@bann.pictureAlt" data-thumbnail="@bann.picturePath" />
+
+
+                                                <img style="margin: 0;padding: 0; margin-bottom: 10px;" class="col-md-6" src="@bann.picturePath" /><br />
+                                            </div>
+                                        }
+
+                                    }
+
+                                    <div class="form-group">
+
+                                        <a style="margin-left: 5px" class="btn btn-danger bannerDelete"><i class="fa fa-trash" title="Resim Sil"></i>Sil</a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                   
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Resim Ekle</strong>
+                    </div>
+                    <form method="post" action="/KullanimAlanlari/kullanimAlanResimEkle" enctype="multipart/form-data">
+                        <div class="card-body card-block">
+
+                            <div class="form-group">
+                                <label class=" form-control-label">Resim</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-image"></i></div>
+                                    <input class="form-control" type="file" name="file">
+
+                                </div>
+
+                            </div>
+                          
+
+
+                            <div class="form-group">
+
+                                <input id="bannerAdd" type="submit" class="btn btn-success" style="float: right" value="Kaydet" />
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!--row end-->
+    </div><!-- .animated -->
+</div>
+
+
+
+@section js{
+
+
+    <script type="text/javascript">
+
+        function failOk(m) {
+            var okFail = '<div class="col-sm-12">';
+            okFail += '<div class="alert  alert-danger alert-dismissible fade show" role="alert">';
+            okFail += ' <span class="badge badge-pill badge-success">Hata</span>' + m;
+            okFail += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            okFail += '<span aria-hidden="true">&times;</span>';
+            okFail += '</button>';
+            okFail += '</div>';
+            okFail += ' </div>';
+            return okFail;
+        }
+        function ok(m) {
+            var ok = '<div class="col-sm-12">';
+            ok += '<div class="alert  alert-success alert-dismissible fade show" role="alert">';
+            ok += ' <span class="badge badge-pill badge-success">Başarılı</span>' + m;
+            ok += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            ok += '<span aria-hidden="true">&times;</span>';
+            ok += '</button>';
+            ok += '</div>';
+            ok += ' </div>';
+            return ok;
+        }
+
+        $(".bannerDelete").click(function () {
+
+            var id = $("input:checked").val()
+            $.ajax({
+                url: "/AdminPanel/KullanimAlanlari/kullanimAlanResimSil",
+                data: { id: id },
+                type: "POST",
+                success: function (data) {
+                    if (data.id == 1) {
+                        var mesaj = data.message;
+                        $(".alert").html(ok(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlaniResimleri") }, 3000);
+                    } else {
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlaniResimleri") }, 3000);
+                    }
+                },
+                error: function (data) {
+                    if (data.id == 0) {
+                        var mesaj = data.message;
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlaniResimleri") }, 2000);
+                    } else {
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlaniResimleri") }, 3000);
+                    }
+                }
+            });
+
+        })
+    </script>
+
+
+}
+

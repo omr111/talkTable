@@ -9,6 +9,29 @@ namespace talkTable.MVCUI.App_Classes
 {
     public class settings
     {
+
+        public static Size bannerSize
+        {
+            get
+            {
+                Size sonuc = new Size();
+                sonuc.Width = Convert.ToInt32(ConfigurationManager.AppSettings["bannerW"]);
+                sonuc.Height = Convert.ToInt32(ConfigurationManager.AppSettings["bannerH"]);
+                return sonuc;
+            }
+
+        }
+        public static Size logoIcon
+        {
+            get
+            {
+                Size sonuc = new Size();
+                sonuc.Width = Convert.ToInt32(ConfigurationManager.AppSettings["logoIconW"]);
+                sonuc.Height = Convert.ToInt32(ConfigurationManager.AppSettings["logoIconH"]);
+                return sonuc;
+            }
+
+        }
         public static Size bigLogo
         {
             get

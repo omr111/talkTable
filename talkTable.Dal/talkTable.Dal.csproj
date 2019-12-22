@@ -51,8 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IadvantageDal.cs" />
-    <Compile Include="Abstract\IadvantageLineDal.cs" />
     <Compile Include="Abstract\IareaInfoDal.cs" />
     <Compile Include="Abstract\IbannerBoxInfoDal.cs" />
     <Compile Include="Abstract\IbannerDal.cs" />
@@ -70,8 +68,6 @@
     <Compile Include="Abstract\IvaliditySectionDal.cs" />
     <Compile Include="Abstract\IwhatIsAdvantageDal.cs" />
     <Compile Include="Abstract\IusingAreaPictureDal.cs" />
-    <Compile Include="Concrete\advantageDal.cs" />
-    <Compile Include="Concrete\advantageLineDal.cs" />
     <Compile Include="Concrete\areaInfoDal.cs" />
     <Compile Include="Concrete\bannerBoxInfoDal.cs" />
     <Compile Include="Concrete\bannerDal.cs" />

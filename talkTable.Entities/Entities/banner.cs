@@ -17,13 +17,13 @@ namespace talkTable.Entities.Entities
 
         public int id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string bannerPath { get; set; }
 
         [StringLength(100)]
         public string onBannerCaption { get; set; }
 
-        [StringLength(10)]
+        [StringLength(250)]
         public string onBannerText { get; set; }
 
         [StringLength(50)]

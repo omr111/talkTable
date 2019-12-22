@@ -1055,6 +1055,10 @@
     <Content Include="Areas\AdminPanel\Views\Home\Index.cshtml" />
     <Content Include="Areas\AdminPanel\Views\siteBilgileri\Index.cshtml" />
     <Content Include="Areas\AdminPanel\Views\KullanimAlanlari\kullanimAlanlari.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\KullanimAlanlari\kullanimAlaniResimleri.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Banner\bannerIconEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Banner\boxGetir.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1139,6 +1143,7 @@
     <Compile Include="App_Classes\settings.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\AdminPanel\AdminPanelAreaRegistration.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\BannerController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\KullanimAlanlariController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\siteBilgileriController.cs" />
@@ -1371,6 +1376,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
+    <Folder Include="images\bannerPictures\icons\" />
     <Folder Include="images\logo\" />
     <Folder Include="images\usingAreaPicture\" />
     <Folder Include="Models\" />

@@ -1,49 +1,74 @@
 ﻿
 @{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "Kullanım Alanları";
-                Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+    ViewBag.Title = "Kullanım Alanları";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
 }
 
 
 @using talkTable.Entities.Entities
-@model List<areaInfo>
+@model usingArea
 
 
-<div id="productUpdateError">
-    @if (TempData["serviceUpdateError"] != null)
-    {
 
-        <div class="col-sm-12">
-            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
-
-                <span class="badge badge-pill badge-success">Hata</span> @TempData["serviceUpdateError"].ToString()
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-
-
-    }
-    <script type="text/javascript">
-        setTimeout(function () { $('#serviceUpdateError').hide('slow'); }, 5000);
-    </script>
-</div>
 <div class="info"></div>
-<div class="content mt-3">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Kullanım Alanları</strong>
+
+    @Html.AntiForgeryToken()
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Kullanım Alanı Tanım</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label class=" form-control-label">Kullanım Alanı Başlık</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                    <input class="form-control areaCaption" required maxlength="100" name="areaCaption" value="@Model.areaCaption"/>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.areaCaption, "", new { @style = "color:red" })
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Kullanım Alanı</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <textarea class="form-control areaDescription" required maxlength="100" name="areaDescription" rows="10" style="overflow:scroll">@Model.areaDescription</textarea>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.areaDescription, "", new { @style = "color:red" })
+                            </div>
+                            <input type="submit" value="Güncelle" data-id="@Model.id" class="btn btn-success using-area" style="float:right" />
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="col-xs-6 col-sm-6" style="margin-top: 20px">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Kullanım Alanı</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                <label class=" form-control-label">Kullanım Alanı Ekle</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <textarea class="form-control areaInfoText" required maxlength="100" name="areaInfoText"></textarea>
+                                </div>
+                                @Html.ValidationMessage("areaInfoText", "", new { @style = "color:red" })
+                            </div>
+                            <a class="btn btn-success areaInfo" style="float:right;color:white">Ekle</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Kullanım Alanları</strong>
+                        </div>
+                        <div class="card-body">
+
                             <div class="panel panel-success">
                                 <div class="panel-heading">
 
@@ -59,33 +84,38 @@
                                 <table id="task-table" class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                           
+
                                             <th>Açıklama</th>
-                                            
+
                                             <th>Sil</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (areaInfo info in Model)
+                                        @foreach (areaInfo info in ViewBag.kullanimAlanlari)
                                         {
                                             <tr>
-                                                <td>@info.areaInfoText</td>                                          
+                                                <td>@info.areaInfoText</td>
 
-                                                <td><button type="submit" data-id="@info.id" class="btn btn-danger deleteService"><i class="fa fa-trash"></i></button></td>
+                                                <td><button type="submit" data-id="@info.id" class="btn btn-danger deleteInfo"><i class="fa fa-trash"></i></button></td>
                                             </tr>
 
                                         }
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div><!-- .animated -->
-</div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+            
+
+            </div>
+        </div><!-- .animated -->
+    </div>
+
 @section js{
     <script type="text/javascript">
         function infoMessageFail(msg) {
@@ -110,11 +140,73 @@
             ok += ' </div>';
             return ok;
         }
-        $(".deleteService").click(function () {
+        $(".areaInfo").click(function () {
+
+            var areaInfoText = $(".areaInfoText").val();
+          
+            $.ajax({
+                url: "/AdminPanel/KullanimAlanlari/kullanimAlanlariEkle",
+                type: "POST",
+                data: { areaInfoText: areaInfoText },
+                success: function (data) {
+                    if (data == 1) {
+
+
+                        $(".info").html(infoMessageOK("Kullanim Alanı Başarıyla Güncellendi."));
+                        
+                        setTimeout(function () { $('.info').hide('slow'); }, 2000);
+                      
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlanlari") }, 3000);
+
+                    } else {
+                        infoMessageFail(" Kullanim Alanı Güncelleme Sırasında Bir Hata Meydana Geldi!");
+
+                        setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                    }
+                },
+                error: function () {
+                    infoMessageFail(" Kullanim Alanı Güncelleme Sırasında Bir Hata Meydana Geldi!");
+
+                    setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                }
+            });
+
+        });
+        $(".using-area").click(function () {
+            var serviceId = $(this).data("id");
+            var areaDescription = $(".areaDescription").val();
+            var areaCaption = $(".areaCaption").val();
+            $.ajax({
+                url: "/AdminPanel/KullanimAlanlari/kullanimAlanlariAciklamaDuzenle",
+                type: "POST",
+                data: { id: serviceId, areaDescription: areaDescription, areaCaption: areaCaption },
+                success: function (data) {
+                    if (data == 1) {
+
+
+                        $(".info").html(infoMessageOK("Kullanim Alanı Başarıyla Güncellendi."));
+                        setTimeout(function () { $('.info').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlanlari") }, 3000);
+
+                    } else {
+                        infoMessageFail(" Kullanim Alanı Güncelleme Sırasında Bir Hata Meydana Geldi!");
+
+                        setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                    }
+                },
+                error: function () {
+                    infoMessageFail(" Kullanim Alanı Güncelleme Sırasında Bir Hata Meydana Geldi!");
+
+                    setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                }
+            });
+
+        });
+        $(".deleteInfo").click(function () {
             var serviceId = $(this).data("id");
             var findTR = $(this).closest("tr");
             $.ajax({
-                url: "/AdminPanel/service/serviceDelete",
+                url: "/AdminPanel/KullanimAlanlari/kullanimAlanlariSil",
                 type: "POST",
                 data: { id: serviceId },
                 success: function (data) {
@@ -123,17 +215,19 @@
                             findTR.remove();
                         });
 
-                        $(".info").html(infoMessageOK(" Service Başarıyla Silindi."));
-                        setTimeout(function () { $('.info').hide('slow'); }, 5000);
+                        $(".info").html(infoMessageOK("Kullanim Alanı Başarıyla Silindi."));
+                        setTimeout(function () { $('.info').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/KullanimAlanlari/kullanimAlanlari") }, 3000);
+
 
                     } else {
-                        infoMessageFail(" Service Silme Sırasında Bir Hata Meydana Geldi!");
+                        infoMessageFail(" Kullanim Alanı Silme Sırasında Bir Hata Meydana Geldi!");
 
                         setTimeout(function () { $('.info').hide('slow'); }, 5000);
                     }
                 },
                 error: function () {
-                    infoMessageFail(" Service Silme Sırasında Bir Hata Meydana Geldi!");
+                    infoMessageFail(" Kullanim Alanı Silme Sırasında Bir Hata Meydana Geldi!");
 
                     setTimeout(function () { $('.info').hide('slow'); }, 5000);
                 }

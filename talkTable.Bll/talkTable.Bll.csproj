@@ -42,8 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IadvantageBll.cs" />
-    <Compile Include="Abstract\IadvantageLineBll.cs" />
     <Compile Include="Abstract\IareaInfoBll.cs" />
     <Compile Include="Abstract\IbannerBll.cs" />
     <Compile Include="Abstract\IbannerBoxInfoBll.cs" />
@@ -60,8 +58,6 @@
     <Compile Include="Abstract\IvalidityBll.cs" />
     <Compile Include="Abstract\IvaliditySectionBll.cs" />
     <Compile Include="Abstract\IwhatIsAdvantageBll.cs" />
-    <Compile Include="Concrete\advantageBll.cs" />
-    <Compile Include="Concrete\advantageLineBll.cs" />
     <Compile Include="Concrete\areaInfoBll.cs" />
     <Compile Include="Concrete\bannerBll.cs" />
     <Compile Include="Concrete\bannerBoxInfoBll.cs" />

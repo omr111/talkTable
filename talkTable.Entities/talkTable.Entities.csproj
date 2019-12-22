@@ -53,8 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\advantage.cs" />
-    <Compile Include="Entities\advantageLine.cs" />
     <Compile Include="Entities\areaInfo.cs" />
     <Compile Include="Entities\banner.cs" />
     <Compile Include="Entities\bannerBoxInfo.cs" />

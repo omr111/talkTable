@@ -12,8 +12,6 @@ namespace talkTable.Entities.Entities
         {
         }
 
-        public virtual DbSet<advantage> advantage { get; set; }
-        public virtual DbSet<advantageLine> advantageLine { get; set; }
         public virtual DbSet<areaInfo> areaInfo { get; set; }
         public virtual DbSet<banner> banner { get; set; }
         public virtual DbSet<bannerBoxInfo> bannerBoxInfo { get; set; }
@@ -47,16 +45,6 @@ namespace talkTable.Entities.Entities
                 .HasMany(e => e.usingAreaPicture)
                 .WithRequired(e => e.usingArea)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<whatIsAdvantage>()
-                .HasMany(e => e.advantage)
-                .WithOptional(e => e.whatIsAdvantage)
-                .HasForeignKey(e => e.whatIsAdvantageId);
-
-            modelBuilder.Entity<whatIsAdvantage>()
-                .HasMany(e => e.advantage1)
-                .WithOptional(e => e.whatIsAdvantage1)
-                .HasForeignKey(e => e.whatIsAdvantageId);
         }
     }
 }
