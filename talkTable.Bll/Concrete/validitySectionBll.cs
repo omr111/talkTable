@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using talkTable.Bll.Abstract;
 using talkTable.Dal.Abstract;
+using talkTable.Entities.Entities;
 
 namespace talkTable.Bll.Concrete
 {
@@ -14,6 +15,31 @@ namespace talkTable.Bll.Concrete
         public validitySectionBll(IvaliditySectionDal validitySectionDal)
         {
             _validitySectionDal = validitySectionDal;
+        }
+
+        public bool add(validitySection validitySection)
+        {
+            return _validitySectionDal.Add(validitySection);
+        }
+
+        public bool delete(validitySection validitySection)
+        {
+            return _validitySectionDal.Delete(validitySection);
+        }
+
+        public List<validitySection> getAll()
+        {
+            return _validitySectionDal.listAll();
+        }
+
+        public validitySection getOne(int id)
+        {
+            return _validitySectionDal.getOne(x => x.id == id);
+        }
+
+        public bool update(validitySection validitySection)
+        {
+            return _validitySectionDal.Update(validitySection);
         }
     }
 }

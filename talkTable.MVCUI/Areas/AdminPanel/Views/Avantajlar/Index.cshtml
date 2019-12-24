@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Avantajlar";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+@using talkTable.Entities.Entities
+@model whatIsAdvantage
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Başarıyla Güncellendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<div class="alert"></div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <form method="post" action="/AdminPanel/Avantajlar/AvantajGuncelle" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Avantajlar</strong>
+                        </div>
+
+                        @Html.HiddenFor(m=>m.id)
+                        <div class="card-body card-block ">
+                            <div class="form-group">
+                                <label class=" form-control-label">Başlık</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <input class="form-control" type="text" value="@Model.advantageCaption" required maxlength="150" name="advantageCaption">
+                                    @Html.ValidationMessage("advantageCaption", "", new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong></strong>
+                        </div>
+
+                        <div class="card-body card-block">
+
+                            <div class="form-group">
+                                <label class=" form-control-label">Açıklama</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <textarea class="form-control" style="overflow:scroll" rows="7" type="text" required maxlength="250" name="advantageInfoText">@Model.advantageInfoText</textarea>
+                                    @Html.ValidationMessage("advantageInfoText", "", new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <input id="bannerAdd" type="submit" class="btn btn-success" style="float: right" value="Güncelle" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--row end-->
+        </form>
+    </div><!-- .animated -->
+</div>
+
+

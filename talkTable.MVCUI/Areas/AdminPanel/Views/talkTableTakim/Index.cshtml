@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Biz Kimiz ?";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+@using talkTable.Entities.Entities
+@model talkTableTeam
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Başarıyla Güncellendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<div class="alert"></div>
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <form method="post" action="/AdminPanel/talkTableTakim/guncelle" >
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Biz Kimiz</strong>
+                        </div>
+
+                        @Html.HiddenFor(m => m.id)
+                        <div class="card-body card-block ">
+                            <div class="form-group">
+                                <label class=" form-control-label">Başlık Manşet</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <input class="form-control" type="text" value="@Model.caption" required maxlength="200" name="caption">
+                                    @Html.ValidationMessageFor(m => m.caption, "", new { @style = "color:red" })
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class=" form-control-label">Takım Başlık</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <input class="form-control" type="text" value="@Model.teamCaption" required maxlength="50" name="teamCaption">
+                                    @Html.ValidationMessageFor(m => m.teamCaption, "", new { @style = "color:red" })
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong></strong>
+                        </div>
+
+                        <div class="card-body card-block">
+
+                            <div class="form-group">
+                                <label class=" form-control-label">Tanıtım Paragraf</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                    <textarea class="form-control" style="overflow:scroll" rows="7" type="text" required maxlength="1000" name="text">@Model.text</textarea>
+                                    @Html.ValidationMessageFor(m=>m.text, "", new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="submit" class="btn btn-warning" style="float: right" value="Güncelle" />
+                                <a id="teamList"  href="/AdminPanel/TakimListesi/Index"class="btn btn-success" style="float: right;margin-right:10px">Takım Listesi</a>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--row end-->
+        </form>
+    </div><!-- .animated -->
+</div>
+

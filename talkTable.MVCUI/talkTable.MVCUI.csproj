@@ -65,6 +65,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.2.5\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.DiskCache, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.Plugins.DiskCache.4.2.5\lib\net45\ImageResizer.Plugins.DiskCache.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageResizer.Plugins.PrettyGifs, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.Plugins.PrettyGifs.4.2.5\lib\net45\ImageResizer.Plugins.PrettyGifs.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -687,6 +696,10 @@
     <Content Include="context\assets\js\main.js" />
     <Content Include="context\assets\js\sweetalert.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="images\usingAreaPicture\app1-a67c5204-f0fb-4c24-8e39-4cd8efbf6fba.jpg" />
+    <Content Include="images\usingAreaPicture\app2-6065c845-fbd3-4fe3-8fdc-638279047c5c.jpg" />
+    <Content Include="images\usingAreaPicture\app3-def40112-1d99-4f9f-b4a5-14e7f33d27c5.jpg" />
+    <Content Include="images\usingAreaPicture\slide1-f71f6179-4065-43b2-8f7a-c9448f0d1587.jpg" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -1059,6 +1072,12 @@
     <Content Include="Areas\AdminPanel\Views\Banner\Index.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Banner\bannerIconEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Banner\boxGetir.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Avantajlar\Index.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\talkTableTakim\Index.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\TakimListesi\Index.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\TakimListesi\UyeEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\TakimListesi\UyeGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Servisler\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1143,10 +1162,14 @@
     <Compile Include="App_Classes\settings.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\AdminPanel\AdminPanelAreaRegistration.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\AvantajlarController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\BannerController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\KullanimAlanlariController.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\ServislerController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\siteBilgileriController.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\TakimListesiController.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\talkTableTakimController.cs" />
     <Compile Include="Controllers\AnaSayfaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1378,7 +1401,8 @@
     <Folder Include="Areas\AdminPanel\Models\" />
     <Folder Include="images\bannerPictures\icons\" />
     <Folder Include="images\logo\" />
-    <Folder Include="images\usingAreaPicture\" />
+    <Folder Include="images\memberPhoto\" />
+    <Folder Include="images\serviceBackground\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
