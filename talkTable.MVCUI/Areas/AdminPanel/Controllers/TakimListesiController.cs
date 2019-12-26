@@ -149,8 +149,8 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         }
 
 
-                        teamMember.picturePath = "/images/memberPhoto/" + newName;
-                        teamMember.pictureAlt = file.FileName;
+                        changeMember.picturePath = "/images/memberPhoto/" + newName;
+                        changeMember.pictureAlt = file.FileName;
 
                     }
                     changeMember.job = teamMember.job;
@@ -159,7 +159,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     return RedirectToAction("index", new { area = "AdminPanel" });
                 }
                 else
-                    return null;
+                    return View();
             }else
                 return View();
         }

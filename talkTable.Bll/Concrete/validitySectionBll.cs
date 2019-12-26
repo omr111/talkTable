@@ -32,9 +32,19 @@ namespace talkTable.Bll.Concrete
             return _validitySectionDal.listAll();
         }
 
+        public List<validitySection> getAllByValidityId(int id)
+        {
+            return _validitySectionDal.listAll(x => x.validity.id == id);
+        }
+
         public validitySection getOne(int id)
         {
             return _validitySectionDal.getOne(x => x.id == id);
+        }
+
+        public validitySection getOneByValidityId(int id)
+        {
+            return _validitySectionDal.getOne(x => x.validity.id == id);
         }
 
         public bool update(validitySection validitySection)

@@ -44,7 +44,7 @@
 
 }
 
-        <h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
 <div class="alert"></div>
 @if (Model != null)
 {
@@ -52,7 +52,7 @@
         <div class="animated fadeIn">
             <form method="post" action="/AdminPanel/Servisler/servisGuncelle" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m=>m.id)
+                @Html.HiddenFor(m => m.id)
                 <div class="row">
                     <div class="col-xs-6 col-sm-6">
                         <div class="card">
@@ -126,11 +126,10 @@ else
 {
     <div class="form-group">
 
-        <h4 style="text-align:center" >Güncellenmek İstenilen Servis Bulunamadı</h4>
+        <h4 style="text-align:center">Güncellenmek İstenilen Servis Bulunamadı</h4>
 
     </div>
 }
-
 
 
 

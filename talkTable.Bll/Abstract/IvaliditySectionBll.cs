@@ -10,6 +10,8 @@ namespace talkTable.Bll.Abstract
     public interface IvaliditySectionBll
     {
         List<validitySection> getAll();
+        List<validitySection> getAllByValidityId(int id);
+        validitySection getOneByValidityId(int id);
         validitySection getOne(int id);
         bool add(validitySection validitySection);
         bool delete(validitySection validitySection);

@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "altServisEkle";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+
+
+@using talkTable.Entities.Entities
+@model validitySection
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Servis Başarıyla Eklendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<div class="alert"></div>
+@if (Model != null)
+{
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <form method="post" action="/AdminPanel/Servisler/altServisEkle" >
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.id)
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Çalışma Alanı</strong>
+                            </div>
+
+
+                            <div class="card-body card-block ">
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Başlık</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-tag"></i></div>
+                                        <input class="form-control" required maxlength="100" type="text" name="caption">
+                                        @Html.ValidationMessageFor(m => m.caption, "", new { @style = "color:red" })
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>İçerik</strong>
+                            </div>
+
+                            <div class="card-body card-block">
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">İçerik Açıklama</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                        <input class="form-control" type="text" name="infoText" maxlength="250" value="@Model.caption">
+                                        @Html.ValidationMessageFor(m => m.infoText, "", new { @style = "color:red" })
+                                    </div>
+
+                                </div>
+                                
+
+
+                                <div class="form-group">
+
+                                    <input type="submit" class="btn btn-success" style="float: right" value="Ekle" />
+                                    <a class="btn btn-danger deleteService"style="float: right;margin-right:10px" data-id="@Model.id" >Sil</a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!--row end-->
+            </form>
+        </div><!-- .animated -->
+    </div>
+}
+else
+{
+    <div class="form-group">
+
+        <h4 style="text-align:center">Güncellenmek İstenilen Servis Bulunamadı</h4>
+
+    </div>
+}
+
+
+
+@section js{
+
+
+    <script type="text/javascript">
+
+        function failOk(m) {
+            var okFail = '<div class="col-sm-12">';
+            okFail += '<div class="alert  alert-danger alert-dismissible fade show" role="alert">';
+            okFail += ' <span class="badge badge-pill badge-success">Hata</span>' + m;
+            okFail += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            okFail += '<span aria-hidden="true">&times;</span>';
+            okFail += '</button>';
+            okFail += '</div>';
+            okFail += ' </div>';
+            return okFail;
+        }
+        function ok(m) {
+            var ok = '<div class="col-sm-12">';
+            ok += '<div class="alert  alert-success alert-dismissible fade show" role="alert">';
+            ok += ' <span class="badge badge-pill badge-success">Başarılı</span>' + m;
+            ok += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            ok += '<span aria-hidden="true">&times;</span>';
+            ok += '</button>';
+            ok += '</div>';
+            ok += ' </div>';
+            return ok;
+        }
+
+        $(".deleteService").click(function () {
+
+            var id = $(this).data("id");
+            $.ajax({
+                url: "/AdminPanel/Servisler/altServisSil",
+                data: { id: id },
+                type: "POST",
+                success: function (data) {
+                    if (data.id == 1) {
+                        var mesaj = data.message;
+                        $(".alert").html(ok(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
+                    } else {
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
+                    }
+                },
+                error: function (data) {
+                    if (data.id == 0) {
+                        var mesaj = data.message;
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 2000);
+                    } else {
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
+                    }
+                }
+            });
+
+        })
+    </script>
+
+
+}
