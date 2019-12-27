@@ -1169,6 +1169,7 @@
     <Compile Include="Areas\AdminPanel\Controllers\BannerController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\KullanimAlanlariController.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\NasilCalisirController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\ServislerController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\siteBilgileriController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\TakimListesiController.cs" />
@@ -1402,7 +1403,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
+    <Folder Include="Areas\AdminPanel\Views\NasilCalisir\" />
     <Folder Include="images\bannerPictures\icons\" />
+    <Folder Include="images\howIsWorkPicture\" />
     <Folder Include="images\logo\" />
     <Folder Include="images\memberPhoto\" />
     <Folder Include="images\serviceBackground\" />

@@ -69,10 +69,10 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     return RedirectToAction("index", new { area = "AdminPanel" });
                 }
                 else
-                    return View("index");
+                    return View("index", validity);
             }
             else
-                return View("index", _service.getOne(1));
+                return View("index", validity);
         }
         public ActionResult servisListesi() { return View(sectionBll.getAll()); }
         public ActionResult altServisEkle()
