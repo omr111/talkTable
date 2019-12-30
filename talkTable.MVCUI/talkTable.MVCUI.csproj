@@ -1081,6 +1081,14 @@
     <Content Include="Areas\AdminPanel\Views\Servisler\altServisEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Servisler\servisListesi.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Servisler\altServisGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\Index.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\NasilCalisirAdimlari.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirResim.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirResimEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirResimGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIconGuncelle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIconEkle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIcon.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1403,8 +1411,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
-    <Folder Include="Areas\AdminPanel\Views\NasilCalisir\" />
     <Folder Include="images\bannerPictures\icons\" />
+    <Folder Include="images\howIsWorkIcon\" />
     <Folder Include="images\howIsWorkPicture\" />
     <Folder Include="images\logo\" />
     <Folder Include="images\memberPhoto\" />

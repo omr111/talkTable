@@ -1,0 +1,230 @@
+﻿
+@{
+    ViewBag.Title = "NasilCalisirAdimlari";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+
+
+
+@using talkTable.Entities.Entities
+@model List<howIsWorkStep>
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Adım Başarıyla Eklendi"|| mesaj == "Adım Başarıyla Güncellendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<div class="alert"></div>
+@if (Model != null)
+{
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Adımlar</strong>
+                        </div>
+
+
+                        <div class="card-body card-block ">
+                            <div class="form-group">
+                                <label class=" form-control-label">Çalışma Adımları</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-step-forward"></i></div>
+                                    <select id="step" name="stepText" style="width:380px">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.id">@item.stepText</option>
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+                            <form method="post" action="/AdminPanel/NasilCalisir/nasilCalisirAdimlariEkle">
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Adım Ekle</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-save"></i></div>
+                                        <input class="form-control" type="text" required maxlength="50" name="stepText">
+                                        <input class="btn btn-success" type="submit" value="Ekle" style="margin-left:5px" />
+                                    </div>
+
+                                </div>
+
+                                </form>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-6">
+                    <form method="post" action="/AdminPanel/NasilCalisir/adimGuncelle">
+                        @Html.AntiForgeryToken()
+
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Güncelle</strong>
+                            </div>
+
+                            <div class="card-body card-block">
+                                
+                                <div class="form-group">
+                                    <label class=" form-control-label">Adım Text</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                        <input id="stepId" type="hidden" name="id" />
+                                        <textarea id="stepText" class="form-control" type="text" name="stepText" maxlength="500" rows="10"></textarea>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input id="updateStepSubmit" hidden type="submit" class="btn btn-warning" style="float: right" value="Güncelle" />
+                                    <a id="deleteStepSubmit" hidden class="btn btn-danger" style="float: right;margin-right:5px" >Sil</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div><!--row end-->
+
+        </div><!-- .animated -->
+    </div>
+}
+else
+{
+    <div class="form-group">
+
+        <h4 style="text-align:center">Güncellenmek İstenilen Servis Bulunamadı</h4>
+
+    </div>
+}
+
+
+
+
+
+@section js{
+    <script type="text/javascript">
+
+        function failOk(m) {
+            var okFail = '<div class="col-sm-12">';
+            okFail += '<div class="alert  alert-danger alert-dismissible fade show" role="alert">';
+            okFail += ' <span class="badge badge-pill badge-success">Hata</span>' + m;
+            okFail += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            okFail += '<span aria-hidden="true">&times;</span>';
+            okFail += '</button>';
+            okFail += '</div>';
+            okFail += ' </div>';
+            return okFail;
+        }
+        function ok(m) {
+            var ok = '<div class="col-sm-12">';
+            ok += '<div class="alert  alert-success alert-dismissible fade show" role="alert">';
+            ok += ' <span class="badge badge-pill badge-success">Başarılı</span>' + m;
+            ok += ' <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+            ok += '<span aria-hidden="true">&times;</span>';
+            ok += '</button>';
+            ok += '</div>';
+            ok += ' </div>';
+            return ok;
+        }
+     
+        $("#step").change(function () {
+
+
+            var e = document.getElementById("step");
+            var id = e.options[e.selectedIndex].value;
+            var text = e.options[e.selectedIndex].text;
+            var addedId = $("#stepId").val(id);
+            var addedText = $("#stepText").val(text);
+            if (addedId == null || addedText == null) {
+
+                $("#updateStepSubmit").prop("hidden", true);
+                $("#deleteStepSubmit").prop("hidden", true);
+                
+            } else {
+                $("#updateStepSubmit").prop("hidden", false);
+                $("#deleteStepSubmit").prop("hidden", false);
+            }
+        
+
+        })
+        $("#deleteStepSubmit").click(function () {
+            var id = $("#stepId").val();
+            $.ajax({
+                url: "/AdminPanel/NasilCalisir/adimSil",
+                data: { id: id },
+                type: "Get",
+                success: function (data) {
+                    if (data == 1) {
+
+                        $(".alert").html(ok("Adım Başarıyla Silindi"));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { document.location.replace("/AdminPanel/NasilCalisir/NasilCalisirAdimlari") }, 3000);
+                    } else {
+                        $(".alert").html(failOk("Silme İşlemi Sırasında Bir Hata Oluştu Lütfen Tekrar Deneyiniz."));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
+                    }
+                },
+                error: function (data) {
+                    if (data.id == 0) {
+                        var mesaj = data.message;
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
+                    } else {
+                        $(".alert").html(failOk(mesaj));
+                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
+                    }
+                }
+            });
+        })
+    </script>
+}
+
+

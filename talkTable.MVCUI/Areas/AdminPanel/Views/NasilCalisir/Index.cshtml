@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+
+
+@using talkTable.Entities.Entities
+@model howIsWork
+@if (Session["bannerEklenemedi"] != null)
+{
+    string mesaj = (string)Session["bannerEklenemedi"];
+    if (mesaj == "Resim Başarıyla Eklendi")
+    {
+
+        <div class="col-sm-12">
+
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+    else
+    {
+        <div class="col-sm-12">
+            <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <span class="badge badge-pill badge-danger">Hata</span> @mesaj
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>';
+                </button>
+            </div>
+        </div>
+        Session["bannerEklenemedi"] = null;
+    }
+
+
+
+}
+
+<h6 style="color:red;margin-left:30px"> @Html.ValidationSummary(true)</h6>
+<div class="alert"></div>
+@if (Model != null)
+{
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <form method="post" action="/AdminPanel/NasilCalisir/guncelle">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.id)
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Başlık</strong>
+                            </div>
+
+
+                            <div class="card-body card-block ">
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Başlık</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                        <input class="form-control" type="text" required maxlength="150" name="captionText" value="@Model.captionText">
+                                        @Html.ValidationMessageFor(m => m.captionText, "", new { @style="color:red"})
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>İçerik</strong>
+                            </div>
+
+                            <div class="card-body card-block">
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Açıklama</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                        <textarea class="form-control" type="text" name="InfoText" maxlength="500" rows="10">@Model.InfoText</textarea>
+                                        @Html.ValidationMessageFor(m => m.InfoText, "", new { @style = "color:red" })
+                                    </div>
+
+                                </div>
+                     
+
+
+                                <div class="form-group">
+
+                                    <input type="submit" class="btn btn-warning" style="float: right" value="Güncelle" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!--row end-->
+            </form>
+        </div><!-- .animated -->
+    </div>
+}
+else
+{
+    <div class="form-group">
+
+        <h4 style="text-align:center">Güncellenmek İstenilen Servis Bulunamadı</h4>
+
+    </div>
+}
+
+
+
+
+
+

@@ -18,6 +18,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         IhowIsWorkBll _how = new howIsWorkBll(new howIsWorkDal());
         IhowIsWorkStepBll _step = new howIsWorkStepBll(new howIsWorkStepDal());
         IhowIsWorkPictureBll _picture = new howIsWorkPictureBll(new howIsWorkPictureDal());
+        IhowIsWorkIconBll _icon = new howIsWorkIconBll(new howIsWorkIconDal());
         public ActionResult Index()
         {
 
@@ -60,10 +61,10 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                step.howIsWorkId = 1;
                 _step.add(step);
                 Session["bannerEklenemedi"] = "Adım Başarıyla Eklendi";
-                return RedirectToAction("index", "NasilCalisirAdimlari", new { area = "AdminPanel" });
+                return RedirectToAction("NasilCalisirAdimlari", "NasilCalisir", new { area = "AdminPanel" });
 
             }
             else
@@ -88,7 +89,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
                     _step.update(isExist);
                     Session["bannerEklenemedi"] = "Adım Başarıyla Güncellendi";
-                    return RedirectToAction("index", "NasilCalisirAdimlari", new { area = "AdminPanel" });
+                    return RedirectToAction("NasilCalisirAdimlari", "NasilCalisir", new { area = "AdminPanel" });
                 }
                 else
                 {
@@ -98,18 +99,18 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
             }
             else
-                return View("NasilCalisirAdimlari");
+                return View("NasilCalisirAdimlari", _step.getAll());
         }
-        public ActionResult adimSil(int id)
+        public int adimSil(int id)
         {
             howIsWorkStep step = _step.getOne(id);
             if (step != null)
             {
                 _step.delete(step);
-                Session["bannerEklenemedi"] = "Adım Başarıyla Silindi";
-                return RedirectToAction("NasilCalisirAdimlari", "NasilCalisir", new { area = "AdminPanel" });
+               
+                return 1;
             }
-            return View();
+            return 0;
         }
         public ActionResult nasilCalisirResim()
         {
@@ -154,15 +155,15 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
                     picture.picturePath = "/images/howIsWorkPicture/" + newName;
                     picture.pictureAlt = file.FileName;
-                    picture.pictureText = picture.pictureText;
+                   
 
-                    _picture.update(picture);
-                    Session["bannerEklenemedi"] = "Resim Başarıyla Güncellendi";
+                    _picture.add(picture);
+                    Session["bannerEklenemedi"] = "Resim Başarıyla Eklendi";
                     return RedirectToAction("nasilCalisirResim", new { area = "AdminPanel" });
                 }
                 else
-                    Session["bannerEklenemedi"] = "Lütfen Güncellemek İstediğiniz Resmi Ekleyiniz";
-                return View("nasilCalisirResimGuncelle", picture);
+                    Session["bannerEklenemedi"] = "Lütfen Eklemek İstediğiniz Resmi Ekleyiniz";
+                return View("nasilCalisirResimEkle", picture);
 
             }
             else
@@ -222,7 +223,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                 }
                 else
                     Session["bannerEklenemedi"] = "Değiştirilmek İstenilen Resim Bulunamadı !";
-                return View("index");
+                return View("nasilCalisirResimGuncelle", pic);
             }
             else
                 return View("nasilCalisirResimGuncelle", pic);
@@ -237,10 +238,153 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     System.IO.File.Delete(Server.MapPath(isExist.picturePath));
                 }
                 _picture.delete(isExist);
-                return RedirectToAction("nasilCalisirResim", "nasilCalisir", new { area = "AdminPanel" });
+                return Json(new { id = 1, message = "Resim Başarıyla Silindi!" });
+            }
+            else return Json(new { id = 0, message = "Resim Silinemedi, Lütfen Tekrar Deneyiniz!" });
+
+        }
+
+
+
+        //icon
+        public ActionResult nasilCalisirIcon()
+        {
+            return View(_icon.getAll());
+        }
+        public ActionResult nasilCalisirIconEkle()
+        {
+            howIsWorkIcon icon = new howIsWorkIcon();
+            icon.howIsWorkId = 1;
+            return View(icon);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult nasilCalisirIconEkle(howIsWorkIcon icon, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+                if (file != null)
+                {
+                    int picWidth = settings.howIsWorkIcon.Width;
+                    int pichHeight = settings.howIsWorkIcon.Height;
+                    string newName = "";
+                    if (file.FileName.Length > 10)
+                    {
+
+                        newName = Path.GetFileNameWithoutExtension(file.FileName.Substring(0, 10)) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    }
+                    else
+                    {
+
+                        newName = Path.GetFileNameWithoutExtension(file.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    }
+                    Image orjResim = Image.FromStream(file.InputStream);
+                    Bitmap pictureDraw = new Bitmap(orjResim, picWidth, pichHeight);
+                    if (Directory.Exists(Server.MapPath("/images/howIsWorkIcon")))
+                    {
+                        pictureDraw.Save(Server.MapPath("/images/howIsWorkIcon/" + newName));
+                    }
+
+
+                    icon.iconPath = "/images/howIsWorkIcon/" + newName;
+                    icon.iconAlt = file.FileName;
+                  
+
+                    _icon.add(icon);
+                    Session["bannerEklenemedi"] = "Icon Başarıyla Eklendi";
+                    return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel" });
+                }
+                else
+                    Session["bannerEklenemedi"] = "Lütfen Eklemek İstediğiniz İkonu Ekleyiniz";
+                return View("nasilCalisirIconEkle", icon);
+
+            }
+            else
+                return View("nasilCalisirIconEkle", icon);
+        }
+        public ActionResult nasilCalisirIconGuncelle(int? id)
+        {
+            if (id.HasValue)
+            {
+                return View(_icon.getOne(id.Value));
+            } else
+                return RedirectToAction("nasilCalisirIcon", "NasilCalisir", new { area = "AdminPanel" }); 
+
+
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult nasilCalisirIconGuncelle(howIsWorkIcon icon, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                howIsWorkIcon changeicon = _icon.getOne(icon.id);
+                if (changeicon != null)
+                {
+                    if (file != null)
+                    {
+                        if (System.IO.File.Exists(Server.MapPath(changeicon.iconPath)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(changeicon.iconPath));
+                        }
+                        int picWidth = settings.howIsWorkIcon.Width;
+                        int pichHeight = settings.howIsWorkIcon.Height;
+                        string newName = "";
+                        if (file.FileName.Length > 10)
+                        {
+
+                            newName = Path.GetFileNameWithoutExtension(file.FileName.Substring(0, 10)) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        }
+                        else
+                        {
+
+                            newName = Path.GetFileNameWithoutExtension(file.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        }
+                        Image orjResim = Image.FromStream(file.InputStream);
+                        Bitmap pictureDraw = new Bitmap(orjResim, picWidth, pichHeight);
+                        if (Directory.Exists(Server.MapPath("/images/howIsWorkIcon")))
+                        {
+                            pictureDraw.Save(Server.MapPath("/images/howIsWorkIcon/" + newName));
+                        }
+
+
+                        changeicon.iconPath = "/images/howIsWorkIcon/" + newName;
+                        changeicon.iconAlt = file.FileName;
+                        changeicon.iconText = icon.iconText;
+
+                        _icon.update(changeicon);
+                        Session["bannerEklenemedi"] = "İkon Başarıyla Güncellendi";
+                        return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel" });
+                    }
+                    else
+                        Session["bannerEklenemedi"] = "Lütfen Güncellemek İstediğiniz İkonu Ekleyiniz";
+                    return View("nasilCalisirIconGuncelle", icon);
+                }
+                else
+                    Session["bannerEklenemedi"] = "Değiştirilmek İstenilen İkon Bulunamadı !";
+                return View("nasilCalisirIconGuncelle", icon);
+            }
+            else
+                return View("nasilCalisirIconGuncelle", icon);
+        }
+        public ActionResult nasilCalisirIconSil(int id)
+        {
+            howIsWorkIcon isExist = _icon.getOne(id);
+            if (isExist != null)
+            {
+                if (System.IO.File.Exists(Server.MapPath(isExist.iconPath)))
+                {
+                    System.IO.File.Delete(Server.MapPath(isExist.iconPath));
+                }
+                _icon.delete(isExist);
+                return RedirectToAction("nasilCalisirIcon", "nasilCalisir", new { area = "AdminPanel" });
             }
             else return View();
-            
+
         }
+
+
     }
 }

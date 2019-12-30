@@ -19,7 +19,7 @@ namespace talkTable.Entities.Entities
 
         public int? howIsWorkId { get; set; }
 
-        [StringLength(100)]
+        [StringLength(250)]
         public string pictureText { get; set; }
 
         public virtual howIsWork howIsWork { get; set; }

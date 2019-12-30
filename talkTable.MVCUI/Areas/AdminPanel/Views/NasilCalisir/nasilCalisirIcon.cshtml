@@ -1,30 +1,33 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "nasilCalisirIcon";
     Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
 }
+
+
+
 @using talkTable.Entities.Entities
-@model List<teamMember>
-@if (Model.Count>0 )
+@model List<howIsWorkIcon>
+@if (Model.Count > 0)
 {
     foreach (var item in Model)
     {
         <div class="col-xl-4 col-md-6 deleteMember" style="width:100%">
-            <div class="single_order" style="width:auto">
+            <div class="single_order" style="width: 116px">
                 <div class="order_thumb" style="position:relative!important;width:100%">
-                    <img src="@item.picturePath" alt="@item.pictureAlt" style="width:100%"/>
+                    <img src="@item.iconPath" alt="@item.iconPath" style="width:100%" />
 
                     <div class="order_prise" style="position:absolute;right:10px;top:10px; ">
-                        <a class="removeMemberClick" title="Üyeyi Sil" data-id="@item.id"><i class="fa fa-trash btn btn-danger "></i></a>
+                        <a class="removeMemberClick" title="Resim Sil" data-id="@item.id"><i class="fa fa-trash btn btn-danger "></i></a>
                     </div>
                     <div class="order_prise" style="position:absolute;right:50px;top:10px; ">
-                        <a title="Üyeyi Güncelle" href="/AdminPanel/TakimListesi/UyeGuncelle/@item.id"><i class="fa fa-refresh btn btn-warning"></i></a>
+                        <a title="Resim Güncelle" href="/AdminPanel/NasilCalisir/nasilCalisirIconGuncelle/@item.id"><i class="fa fa-refresh btn btn-warning"></i></a>
                     </div>
                 </div>
-                <div class="order_info" style="text-align:center;width:100%" >
-                    <h5><a href="#" style="width:auto">@item.name</a></h5>
+                <div class="order_info" style="text-align:center;width:100%">
+
                     <p>
-                       @item.job
+                        @item.iconText
                     </p>
 
                 </div>
@@ -34,17 +37,17 @@
 }
 else
 {
-    
-        <div class="container">
-            <h5 style="text-align:center"><a href="/AdminPanel/TakimListesi/UyeEkle">Takım Üyesi Bulunamadı. Eklemek İçin Tıklayınız.</a></h5>
-        </div>
-  
+
+    <div class="container">
+        <h5 style="text-align:center"><a href="/AdminPanel/NasilCalisir/nasilCalisirResimEkle">Listenecek Herhangi Bir Resim Bulunamadı. Eklemek İçin Tıklayınız.</a></h5>
+    </div>
+
 }
 
 
 
-        @section js{
-        <script type="text/javascript">
+@section js{
+    <script type="text/javascript">
 
             function failOk(m) {
                 var okFail = '<div class="col-sm-12">';
@@ -73,39 +76,35 @@ else
 
                 var id = $(this).data("id");
                 var deleteMember = $(this).closest(".deleteMember");
-            
+
                 $.ajax({
-                    url: "/AdminPanel/TakimListesi/UyeSil",
+                    url: "/AdminPanel/NasilCalisir/nasilCalisirResimSil",
                     data: { id: id },
                     type: "POST",
                     success: function (data) {
                         if (data.id == 1) {
                             var mesaj = data.message;
                             $(".alert").html(ok(mesaj));
-                            
+
                             deleteMember.remove();
                             setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            //setTimeout(function () { document.location.replace("/AdminPanel/TakimListesi/Index") }, 3000);
+                            setTimeout(function () { document.location.replace("/AdminPanel/NasilCalisir/nasilCalisirResim") }, 3000);
                         } else {
                             $(".alert").html(failOk(mesaj));
                             setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            setTimeout(function () { document.location.replace("/AdminPanel/TakimListesi/Index") }, 3000);
+
                         }
                     },
                     error: function (data) {
-                        if (data.id == 0) {
+
                             var mesaj = data.message;
                             $(".alert").html(failOk(mesaj));
                             setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            setTimeout(function () { document.location.replace("/AdminPanel/TakimListesi/Index") }, 2000);
-                        } else {
-                            $(".alert").html(failOk(mesaj));
-                            setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            setTimeout(function () { document.location.replace("/AdminPanel/TakimListesi/Index") }, 3000);
-                        }
+                            setTimeout(function () { document.location.replace("/AdminPanel/NasilCalisir/nasilCalisirResim") }, 3000);
+
                     }
                 });
 
             })
-        </script>
-            }
+    </script>
+}

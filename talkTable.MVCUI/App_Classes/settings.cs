@@ -9,8 +9,20 @@ namespace talkTable.MVCUI.App_Classes
 {
     public class settings
     {
-        
-             public static Size howIsWorkPicture
+
+        public static Size howIsWorkIcon
+        {
+            get
+            {
+                Size sonuc = new Size();
+                sonuc.Width = Convert.ToInt32(ConfigurationManager.AppSettings["howIsWorkIconW"]);
+                sonuc.Height = Convert.ToInt32(ConfigurationManager.AppSettings["howIsWorkIconH"]);
+                return sonuc;
+            }
+
+        }
+
+        public static Size howIsWorkPicture
         {
             get
             {
