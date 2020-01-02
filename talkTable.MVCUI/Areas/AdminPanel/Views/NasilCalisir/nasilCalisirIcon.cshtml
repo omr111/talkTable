@@ -16,12 +16,12 @@
             <div class="single_order" style="width: 116px">
                 <div class="order_thumb" style="position:relative!important;width:100%">
                     <img src="@item.iconPath" alt="@item.iconPath" style="width:100%" />
-
+                   
                     <div class="order_prise" style="position:absolute;right:10px;top:10px; ">
-                        <a class="removeMemberClick" title="Resim Sil" data-id="@item.id"><i class="fa fa-trash btn btn-danger "></i></a>
+                        <a class="removeMemberClick" title="İkon Sil"  data-id="@item.id"><i class="fa fa-trash btn btn-danger "></i></a>
                     </div>
                     <div class="order_prise" style="position:absolute;right:50px;top:10px; ">
-                        <a title="Resim Güncelle" href="/AdminPanel/NasilCalisir/nasilCalisirIconGuncelle/@item.id"><i class="fa fa-refresh btn btn-warning"></i></a>
+                        <a title="İkon Güncelle" href="/AdminPanel/NasilCalisir/nasilCalisirIconGuncelle/@item.id"><i class="fa fa-refresh btn btn-warning"></i></a>
                     </div>
                 </div>
                 <div class="order_info" style="text-align:center;width:100%">
@@ -39,7 +39,7 @@ else
 {
 
     <div class="container">
-        <h5 style="text-align:center"><a href="/AdminPanel/NasilCalisir/nasilCalisirResimEkle">Listenecek Herhangi Bir Resim Bulunamadı. Eklemek İçin Tıklayınız.</a></h5>
+        <h5 style="text-align:center"><a href="/AdminPanel/NasilCalisir/nasilCalisirResim">Listenecek Herhangi Bir İkon Bulunamadı. Eklemek İçin Tıklayınız.</a></h5>
     </div>
 
 }
@@ -75,35 +75,38 @@ else
             $(".removeMemberClick").click(function () {
 
                 var id = $(this).data("id");
+
                 var deleteMember = $(this).closest(".deleteMember");
+                if (confirm("İkonu Silmek İstediğinizden Emin misiniz ?")) {
+                    $.ajax({
+                        url: "/AdminPanel/NasilCalisir/nasilCalisirIconSil",
+                        data: { id: id },
+                        type: "POST",
+                        success: function (data) {
+                            if (data == 1) {
+                                var mesaj = "İkon Başarıyla Silindi."
+                                $(".alert").html(ok(mesaj));
 
-                $.ajax({
-                    url: "/AdminPanel/NasilCalisir/nasilCalisirResimSil",
-                    data: { id: id },
-                    type: "POST",
-                    success: function (data) {
-                        if (data.id == 1) {
+                                deleteMember.remove();
+                                setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
+                            } else {
+                                $(".alert").html(failOk("İkon Silme Sırasında Bir Hata Oluştu !"));
+                                setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
+                            }
+                        },
+                        error: function (data) {
+
                             var mesaj = data.message;
-                            $(".alert").html(ok(mesaj));
-
-                            deleteMember.remove();
-                            setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            setTimeout(function () { document.location.replace("/AdminPanel/NasilCalisir/nasilCalisirResim") }, 3000);
-                        } else {
                             $(".alert").html(failOk(mesaj));
                             setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+
 
                         }
-                    },
-                    error: function (data) {
-
-                            var mesaj = data.message;
-                            $(".alert").html(failOk(mesaj));
-                            setTimeout(function () { $('.alert').hide('slow'); }, 2000);
-                            setTimeout(function () { document.location.replace("/AdminPanel/NasilCalisir/nasilCalisirResim") }, 3000);
-
-                    }
-                });
+                    });
+                }
+              
 
             })
     </script>

@@ -212,6 +212,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         changePicture.picturePath = "/images/howIsWorkPicture/" + newName;
                         changePicture.pictureAlt = file.FileName;
                         changePicture.pictureText = pic.pictureText;
+                        changePicture.stepText = pic.stepText;
 
                         _picture.update(changePicture);
                         Session["bannerEklenemedi"] = "Resim Başarıyla Güncellendi";
@@ -247,14 +248,14 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
 
         //icon
-        public ActionResult nasilCalisirIcon()
+        public ActionResult nasilCalisirIcon(int id)
         {
-            return View(_icon.getAll());
+            return View(_icon.getAllByPictureId(id));
         }
-        public ActionResult nasilCalisirIconEkle()
+        public ActionResult nasilCalisirIconEkle(int id)
         {
             howIsWorkIcon icon = new howIsWorkIcon();
-            icon.howIsWorkId = 1;
+            icon.howIsworkPictureId = id;
             return View(icon);
         }
         [ValidateAntiForgeryToken]
@@ -293,8 +294,8 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                   
 
                     _icon.add(icon);
-                    Session["bannerEklenemedi"] = "Icon Başarıyla Eklendi";
-                    return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel" });
+                   
+                    return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel",id=icon.howIsworkPictureId });
                 }
                 else
                     Session["bannerEklenemedi"] = "Lütfen Eklemek İstediğiniz İkonu Ekleyiniz";
@@ -355,8 +356,8 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         changeicon.iconText = icon.iconText;
 
                         _icon.update(changeicon);
-                        Session["bannerEklenemedi"] = "İkon Başarıyla Güncellendi";
-                        return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel" });
+                     
+                        return RedirectToAction("nasilCalisirIcon", new { area = "AdminPanel",id=changeicon.howIsworkPictureId });
                     }
                     else
                         Session["bannerEklenemedi"] = "Lütfen Güncellemek İstediğiniz İkonu Ekleyiniz";
@@ -369,7 +370,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
             else
                 return View("nasilCalisirIconGuncelle", icon);
         }
-        public ActionResult nasilCalisirIconSil(int id)
+        public int nasilCalisirIconSil(int id)
         {
             howIsWorkIcon isExist = _icon.getOne(id);
             if (isExist != null)
@@ -379,9 +380,9 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     System.IO.File.Delete(Server.MapPath(isExist.iconPath));
                 }
                 _icon.delete(isExist);
-                return RedirectToAction("nasilCalisirIcon", "nasilCalisir", new { area = "AdminPanel" });
+                return 1;
             }
-            else return View();
+            else return 0;
 
         }
 

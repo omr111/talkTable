@@ -1,15 +1,40 @@
-﻿
+﻿@using talkTable.MVCUI.Models
+@model homeModels
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_banner")
-@Html.Partial("_InformationPartOfWhat")
-@Html.Partial("_howIsWork")
-@Html.Partial("_usingArea")
-@Html.Partial("_advantage")
-@Html.Partial("_validity")
-@Html.Partial("_talkTableTeam")
-@Html.Partial("_sendMail")
+@Html.Partial("_banner", @Model.banner)
+@Html.Partial("_InformationPartOfWhat", Model.site)
+@Html.Partial("_howIsWork", Model.how)
+@Html.Partial("_usingArea", Model.area)
+@Html.Partial("_advantage", Model.advantage)
+@Html.Partial("_validity", Model.service)
+@Html.Partial("_talkTableTeam", Model.team)
+@Html.Partial("_sendMail", Model.site)
+@section footer{
+<footer class="no-menu">
+    <div class="container">
+        <div class="footer">
+            <div class="logo" data-aos="flip-left" data-aos-offset="-600">
+                <a href="#">
+                    <img src="context/context/assests/images/footer-logo.png" alt="">
+                </a>
+            </div>
+
+            <div class="socials" data-aos="flip-left" data-aos-offset="-400">
+                <ul>
+                    <li><a href="@Model.site.twitterUrl"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="@Model.site.faceUrl"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="@Model.site.instagramUrl"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="author container" style="text-align:center;font-size:13px; color:white">Bilgisayar Mühendisi Ömer Çetinkaya | 0531 365 13 56</div>
+</footer>
+}
 

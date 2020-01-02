@@ -20,7 +20,10 @@ namespace talkTable.Bll.Concrete
         {
             return _howIsWorkIconDal.Add(howIsWorkIcon);
         }
-
+        public List<howIsWorkIcon> getAllByPictureId(int id)
+        {
+            return _howIsWorkIconDal.listAll(x => x.howIsworkPictureId == id);
+        }
         public bool delete(howIsWorkIcon howIsWorkIcon)
         {
             return _howIsWorkIconDal.Delete(_howIsWorkIconDal.getOne(x => x.id == howIsWorkIcon.id));

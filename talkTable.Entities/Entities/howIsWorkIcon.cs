@@ -20,8 +20,8 @@ namespace talkTable.Entities.Entities
         [StringLength(50)]
         public string iconText { get; set; }
 
-        public int? howIsWorkId { get; set; }
+        public int? howIsworkPictureId { get; set; }
 
-        public virtual howIsWork howIsWork { get; set; }
+        public virtual howIsWorkPicture howIsWorkPicture { get; set; }
     }
 }

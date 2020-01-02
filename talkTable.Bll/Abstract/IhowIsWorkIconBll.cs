@@ -10,6 +10,7 @@ namespace talkTable.Bll.Abstract
     public interface IhowIsWorkIconBll
     {
         List<howIsWorkIcon> getAll();
+        List<howIsWorkIcon> getAllByPictureId(int id);
         howIsWorkIcon getOne(int id);
         bool add(howIsWorkIcon howIsWorkIcon);
         bool delete(howIsWorkIcon howIsWorkIcon);

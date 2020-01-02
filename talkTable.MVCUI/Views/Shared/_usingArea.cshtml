@@ -1,20 +1,26 @@
-﻿<section class="services" id="services">
+﻿@using talkTable.Entities.Entities
+@model usingArea
+<section class="services" id="services">
     <div class="container" data-aos="slide-right">
-        <div class="section-title">Kullanım Alanları</div>
+        <div class="section-title">@Model.areaCaption</div>
         <div class="content text-center">
             <p>
-                Günlük telaşın içinde fatura ödemesini yapamayanlara, <br>
-                Alışverişte kasa kuyruğu beklemeyi ve eşya taşımayı sevmeyenlere, <br>
-                İnternette kredi kartı girmeye güvenmeyenlere,<br>
-                Uzun uzun kredi kartı bilgisi girmek istemeyenlere
+               @Model.areaDescription
             </p>
         </div>
     </div>
     <div class="imgs" data-aos="slide-up">
+        
         <ul>
-            <li><img src="context/assests/images/app1.jpg" alt=""></li>
-            <li><img src="context/assests/images/app2.jpg" alt=""></li>
-            <li><img src="context/assests/images/app3.jpg" alt=""></li>
+            @if (Model.usingAreaPicture.Any())
+            {
+                foreach (var pic in Model.usingAreaPicture)
+                {
+                    <li><img src="@pic.picturePath" alt="@pic.pictureAlt"></li>
+                }
+            }
+
+
         </ul>
     </div>
     <div class="container">
@@ -49,9 +55,14 @@
             </div>
             <div class="center" data-aos="slide-right">
                 <ul>
-                    <li>Yüksek müşteri memnuniyeti, daha hızlı ve daha çok satış ve sipariş imkanı</li>
-                    <li>Her mecradan, satış, pazarlama ve yeni pazar yeri yaratılabilmesi</li>
-                    <li>Ödeme, sipariş ve kampanya kanalları için düşük altyapı maliyeti</li>
+                    @if (Model.areaInfo.Any())
+                    {
+                        foreach (var info in Model.areaInfo)
+                        {
+                            <li>@info.areaInfoText</li>
+                           
+                        }
+                    }
                 </ul>
             </div>
             <div class="bottom" data-aos="slide-up">

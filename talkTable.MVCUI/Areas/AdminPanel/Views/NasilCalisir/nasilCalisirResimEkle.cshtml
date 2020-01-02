@@ -86,12 +86,21 @@
                                 <label class=" form-control-label"> Resim Açıklama</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
-                                    <input class="form-control" type="text" name="pictureText" required maxlength="50"/>
+                                    <input class="form-control" type="text" name="pictureText" required maxlength="250" />
                                     @Html.ValidationMessageFor(m => m.pictureText, "", new { @style = "color:red" })
                                 </div>
                                 @Html.HiddenFor(m => m.howIsWorkId)
                             </div>
-                  
+                            <div class="form-group">
+                                <label class=" form-control-label"> Adım Açıklama</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                    <input class="form-control" type="text" name="stepText" required maxlength="150" />
+                                    @Html.ValidationMessageFor(m => m.stepText, "", new { @style = "color:red" })
+                                </div>
+                               
+                            </div>
+
 
                             <div class="form-group">
 

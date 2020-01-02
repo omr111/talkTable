@@ -19,7 +19,6 @@ namespace talkTable.Entities.Entities
         [StringLength(100)]
         public string job { get; set; }
 
-      
         [StringLength(150)]
         public string picturePath { get; set; }
 

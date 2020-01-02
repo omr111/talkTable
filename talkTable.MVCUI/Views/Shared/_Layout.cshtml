@@ -15,9 +15,9 @@
 
 
     <link href="/context/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/context/assets/css/font-awesome.min.css" rel="stylesheet" /> 
+    <link href="/context/assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/context/assets/css/animate.min.css" rel="stylesheet" />
-    <link href="/context/assets/css/aos.css" rel="stylesheet" /> 
+    <link href="/context/assets/css/aos.css" rel="stylesheet" />
     <link href="/context/assets/css/style.css" rel="stylesheet" />
 </head>
 <body>
@@ -54,14 +54,7 @@
                         <li><a href="#team">Biz Kimiz?</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
-                    <div class="lang">
-                        <form action="#">
-                            <select name="" id="" onchange="location = this.value;">
-                                <option selected value="">TR</option>
-                                <option value="en">EN</option>
-                            </select>
-                        </form>
-                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -78,25 +71,7 @@
 
 
     </div>
-    <footer class="no-menu">
-        <div class="container">
-            <div class="footer">
-                <div class="logo" data-aos="flip-left" data-aos-offset="-600">
-                    <a href="#">
-                        <img src="context/context/assests/images/footer-logo.png" alt="">
-                    </a>
-                </div>
-              
-                <div class="socials" data-aos="flip-left" data-aos-offset="-400">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    @RenderSection("footer", false);
 
    
     <script src="/context/assets/js/jquery-3.1.1.min.js"></script>

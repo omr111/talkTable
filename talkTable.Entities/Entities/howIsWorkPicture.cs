@@ -9,6 +9,12 @@ namespace talkTable.Entities.Entities
     [Table("howIsWorkPicture")]
     public partial class howIsWorkPicture
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public howIsWorkPicture()
+        {
+            howIsWorkIcon = new HashSet<howIsWorkIcon>();
+        }
+
         public int id { get; set; }
 
         [StringLength(150)]
@@ -22,6 +28,14 @@ namespace talkTable.Entities.Entities
         [StringLength(250)]
         public string pictureText { get; set; }
 
+        [StringLength(150)]
+        public string stepText { get; set; }
+
+
+
         public virtual howIsWork howIsWork { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<howIsWorkIcon> howIsWorkIcon { get; set; }
     }
 }

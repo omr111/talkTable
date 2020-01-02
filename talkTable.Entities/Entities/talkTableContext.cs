@@ -32,10 +32,6 @@ namespace talkTable.Entities.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<banner>()
-                .Property(e => e.onBannerText)
-                .IsFixedLength();
-
             modelBuilder.Entity<usingArea>()
                 .HasMany(e => e.areaInfo)
                 .WithRequired(e => e.usingArea)

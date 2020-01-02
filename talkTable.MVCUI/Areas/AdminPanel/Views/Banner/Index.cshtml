@@ -11,7 +11,7 @@
     if (mesaj == "Resim Başarıyla Eklendi")
     {
 
-        <div class="col-sm-12">
+        <div class="col-sm-12 kapat">
 
             <div class="alert  alert-success alert-dismissible fade show" role="alert">
                 <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
@@ -24,7 +24,7 @@
     }
     else
     {
-        <div class="col-sm-12">
+        <div class="col-sm-12 kapat">
             <div class="alert  alert-danger alert-dismissible fade show" role="alert">
                 <span class="badge badge-pill badge-danger">Hata</span> @mesaj
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -189,11 +189,11 @@
                     if (data.id == 1) {
                         var mesaj = data.message;
                         $(".alert").html(ok(mesaj));
-                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { $('.kapat').hide('slow'); }, 2000);
                         setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
                     } else {
                         $(".alert").html(failOk(mesaj));
-                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { $('.kapat').hide('slow'); }, 2000);
                         setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
                     }
                 },
@@ -201,11 +201,11 @@
                     if (data.id == 0) {
                         var mesaj = data.message;
                         $(".alert").html(failOk(mesaj));
-                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { $('.kapat').hide('slow'); }, 2000);
                         setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 2000);
                     } else {
                         $(".alert").html(failOk(mesaj));
-                        setTimeout(function () { $('.alert').hide('slow'); }, 2000);
+                        setTimeout(function () { $('.kapat').hide('slow'); }, 2000);
                         setTimeout(function () { document.location.replace("/AdminPanel/Banner/Index") }, 3000);
                     }
                 }

@@ -1,149 +1,119 @@
-﻿<section class="how" id="how">
+﻿@using talkTable.Entities.Entities
+@model howIsWork
+
+
+
+
+
+<section class="how" id="how">
     <div class="container">
-        <div class="section-title" data-aos="slide-right">Moneymo Nasıl Çalışıyor?</div>
+        <div class="section-title" data-aos="slide-right">@Model.captionText</div>
         <div class="section-desc" data-aos="slide-right">
-            Mobil bankacılık uygulamaları ile güvenli ve fotoğraf çekmek kadar kolay bir şekilde <br>
-            ödeme ve sipariş verme imkanı sağlar.
+            @Model.InfoText
         </div>
         <div class="phone-timeline-area" data-aos="slide-up">
-            <ul>
-                <li>
-                    <span class="number">1</span><span class="text">
-                        Bankaların Mobil <br>
-                        Uygulamalarına Gir
-                    </span>
-                </li>
-                <li>
-                    <span class="number">2</span><span class="text">
-                        Kare Kod ile <br>
-                        Ödeme Seç
-                    </span>
-                </li>
-                <li>
-                    <span class="number">3</span><span class="text">
-                        Qr Kodu Okutarak <br>
-                        Her Mecradan Alışveriş Yap
-                    </span>
-                </li>
-                <li>
-                    <span class="number">4</span><span class="text">
-                        Ödemeyi <br>
-                        Onayla
-                    </span>
-                </li>
-            </ul>
-            <div class="timeline" data-aos="slide-up" data-aos-delay="100">
-                <div class="blocks">
-                    <div class="block block1">
-                        <div class="number-area">
-                            <span class="number">1</span><span class="text">
-                                Bankaların Mobil <br>
-                                Uygulamalarına Girilir
+            @if (Model.howIsWorkPicture.Any())
+            {
+                int index = 1;
+                <ul>
+                    @foreach (var step in Model.howIsWorkPicture)
+                    {
+
+                        <li>
+                            <span class="number">@index</span><span class="text">
+                                @step.stepText
                             </span>
-                        </div>
-                        <div class="phone">
-                            <img src="context/assests/images/phone1.png" alt="">
-                        </div>
-                        <div class="text">
-                            Her gün kullandığınız mobil bankacılık uygulamanıza, alıştığınız bir yöntemle (şifre, parmak izi, gibi) giriş yapılır.
-                        </div>
-                    </div>
-                    <div class="block block2">
-                        <div class="number-area">
-                            <span class="number">2</span><span class="text">
-                                Kare Kod ile <br>
-                                Ödeme Seçilir
-                            </span>
-                        </div>
-                        <div class="phone">
-                            <img src="context/assests/images/phone2.png" alt="">
-                        </div>
-                        <div class="text">
-                            Bankanızın tasarladığı ön yüzde karekodla (QR ile ) ödeme menüsü seçilir.
-                        </div>
-                    </div>
-                    <div class="block block3">
-                        <div class="number-area">
-                            <span class="number">3</span><span class="text">
-                                Qr Kodu okutarak <br>
-                                Her mecradan alışveriş yap
-                            </span>
-                        </div>
-                        <div class="phone int" id="phone-int">
-                            <img src="context/assests/images/phone3.png" alt="">
-                            <img src="context/assests/images/phone3-full.png" class="full" alt="">
-                            <div class="ints">
-                                <div class="left1">
-                                    <img src="context/assests/images/p-left1.png" alt="">
-                                    <div class="text">
-                                        Fatura <br> Ödemelerinde
+                        </li>
+
+
+                        index++;
+                    }
+
+                </ul>
+
+                <div class="timeline" data-aos="slide-up" data-aos-delay="100">
+                    <div class="blocks">
+
+                        @foreach (var picture in Model.howIsWorkPicture)
+                        {
+
+                            <div class="block">
+
+                                <div class="phone int"id="phone-int">
+                                    <img src="@picture.picturePath" alt="@picture.pictureAlt">
+                                    @if (picture.howIsWorkIcon.Count>0)
+                                    {
+                                        int sayac = 1;
+
+                                        string left = "left" + sayac;
+                                        string right = "right" + sayac;
+                                    <div class="ints">
+                                        @if (picture.howIsWorkIcon.Count > 4)
+                                        {
+                                            foreach (var icon in picture.howIsWorkIcon.Take(4))
+                                            {
+
+                                                <div class="@left">
+                                                    <img src="@icon.iconPath" alt="@icon.iconAlt">
+                                                    <div class="text">
+                                                        @icon.iconText
+                                                    </div>
+                                                </div>
+
+
+
+                                                sayac++;
+                                                left = "left" + sayac;
+                                            }
+                                            sayac = 1;
+                                            foreach (var icon in picture.howIsWorkIcon.Skip(4).ToList())
+                                            {
+
+                                                <div class="@right">
+                                                    <img src="@icon.iconPath" alt="@icon.iconAlt">
+                                                    <div class="text">
+                                                        @icon.iconText
+                                                    </div>
+                                                </div>
+
+                                                sayac++;
+                                                right = "right" + sayac;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            sayac = 1;
+                                            foreach (var icon in picture.howIsWorkIcon)
+                                            {
+
+                                                <div class="@left">
+                                                    <img src="@icon.iconPath" alt="@icon.iconAlt">
+                                                    <div class="text">
+                                                        @icon.iconText
+                                                    </div>
+                                                </div>
+
+
+
+                                                sayac++;
+                                                left = "left" + sayac;
+                                            }
+                                        }
                                     </div>
+                                    }
                                 </div>
-                                <div class="left2">
-                                    <img src="context/assests/images/p-left2.png" alt="">
-                                    <div class="text one-line">
-                                        Mağazada
-                                    </div>
-                                </div>
-                                <div class="left3">
-                                    <img src="context/assests/images/p-left3.png" alt="">
-                                    <div class="text">
-                                        Kafede, <br> Restoranda
-                                    </div>
-                                </div>
-                                <div class="left4">
-                                    <img src="context/assests/images/p-left4.png" alt="">
-                                    <div class="text one-line">
-                                        Markette
-                                    </div>
-                                </div>
-                                <div class="right1">
-                                    <img src="context/assests/images/p-right1.png" alt="">
-                                    <div class="text">
-                                        Online <br> Alışverişte
-                                    </div>
-                                </div>
-                                <div class="right2">
-                                    <img src="context/assests/images/p-right2.png" alt="">
-                                    <div class="text one-line">
-                                        Yolda
-                                    </div>
-                                </div>
-                                <div class="right3">
-                                    <img src="context/assests/images/p-right3.png" alt="">
-                                    <div class="text">
-                                        Kapıda <br> Ödemelerde
-                                    </div>
-                                </div>
-                                <div class="right4">
-                                    <img src="context/assests/images/p-right4.png" alt="">
-                                    <div class="text">
-                                        Katalog <br> Alışverişlerinde
-                                    </div>
+                                <div class="text">
+                                    @picture.pictureText
                                 </div>
                             </div>
-                        </div>
-                        <div class="text">
-                            İlgilendiğiniz ürün, hizmet veya ödemenin
-                            karekoduna kamera tutulur.
-                        </div>
-                    </div>
-                    <div class="block block4">
-                        <div class="number-area">
-                            <span class="number">4</span><span class="text">
-                                Ödemeyi <br>
-                                Onayla
-                            </span>
-                        </div>
-                        <div class="phone">
-                            <img src="context/assests/images/phone4.png" alt="">
-                        </div>
-                        <div class="text">
-                            Dilediğiniz kart ve siparişiniz adrese teslim edilecekse adres seçimi ile ödeme onaylanarak tamamlanır.
-                        </div>
+                        }
+
+
+
+
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </section>

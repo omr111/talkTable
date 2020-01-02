@@ -1,75 +1,52 @@
-﻿<section class="customers" id="customers">
+﻿@using talkTable.Entities.Entities
+@model validity
+<section class="customers" id="customers" style="background-image: url('@Model.validityPicturePath');">
     <div class="container">
         <div class="left" data-aos="slide-right" data-aos-delay="0">
-            <div class="section-title">İşbirlikçi Model ile Verimli Pazar</div>
+            <div class="section-title">@Model.caption</div>
             <div class="section-desc">
-                İşbirlikçi Entegrasyon Felsefesi ile tüm tarafları bir araya getirir.
-                Pazarın düşük maliyetle, daha verimli gelişmesi sağlanır.
+                @Model.infoText
             </div>
             <div class="two-block row" data-aos="slide-up">
-                <div class="block col-md-6">
-                    <div class="details">
-                        <div class="title">
-                            Tüm Banka Mobil <br>
-                            Uygulamaları ve E-Cüzdanlar
+                @if (Model.validitySection.Any())
+                {
+                    foreach (var sec in Model.validitySection)
+                    {
+                        <div class="block col-md-6">
+                            <div class="details">
+                                <div class="title">
+                                    @sec.caption
+                                </div>
+                                <div class="desc">
+                                    @sec.infoText
+                                </div>
+                            </div>
                         </div>
-                        <div class="desc">
-                            Üye İşyeri, Kredi Kartı, Banka Kartı, Kampanya, Ödeme
-                            Servisleri, Kredi Servisleri
-                        </div>
-                    </div>
-                    <!--
-                    <div class="list">
-                    <div class="services-list slider">
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    </div>
-                    </div> !-->
-                </div>
-                <div class="block col-md-6">
-                    <div class="details">
-                        <div class="title">Tüm Firma ve Markalar <br><br></div>
-                        <div class="desc">
-                            Ödeme Servisi, Sipariş Servisi, Sadakat
-                            Kampanya, Üye İş Yeri, Kredili Satış
-                            Kanallar, Pazarlama, Web Siteleri
-                        </div>
-                    </div>
-                    <!--
-                    <div class="list">
-                    <div class="services-list slider">
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    <ul>
-                    <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
-                    <li><img src="context/assests/images/canon.png" alt=""></li>
-                    <li><img src="context/assests/images/kia-hp.png" alt=""></li>
-                    </ul>
-                    </div>
-                    </div> !-->
-                </div>
+                    }
+                }
+
+
             </div>
         </div>
-    </div>
 </section>
+
+<!--
+                  <div class="list">
+                  <div class="services-list slider">
+                  <ul>
+                  <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
+                  <li><img src="context/assests/images/canon.png" alt=""></li>
+                  <li><img src="context/assests/images/kia-hp.png" alt=""></li>
+                  </ul>
+                  <ul>
+                  <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
+                  <li><img src="context/assests/images/canon.png" alt=""></li>
+                  <li><img src="context/assests/images/kia-hp.png" alt=""></li>
+                  </ul>
+                  <ul>
+                  <li><img src="context/assests/images/samsung-intel.png" alt=""></li>
+                  <li><img src="context/assests/images/canon.png" alt=""></li>
+                  <li><img src="context/assests/images/kia-hp.png" alt=""></li>
+                  </ul>
+                  </div>
+                  </div> !-->

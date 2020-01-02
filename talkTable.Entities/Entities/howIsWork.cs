@@ -12,7 +12,6 @@ namespace talkTable.Entities.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public howIsWork()
         {
-            howIsWorkIcon = new HashSet<howIsWorkIcon>();
             howIsWorkPicture = new HashSet<howIsWorkPicture>();
             howIsWorkStep = new HashSet<howIsWorkStep>();
         }
@@ -26,9 +25,6 @@ namespace talkTable.Entities.Entities
         [Required]
         [StringLength(500)]
         public string InfoText { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<howIsWorkIcon> howIsWorkIcon { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<howIsWorkPicture> howIsWorkPicture { get; set; }
