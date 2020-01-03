@@ -36,5 +36,9 @@ namespace talkTable.Bll.Concrete
         {
             return _bannerDal.getOne(x=>x.id==id);
         }
+        public bool update(banner banner)
+        {
+            return _bannerDal.Update(banner);
+        }
     }
 }

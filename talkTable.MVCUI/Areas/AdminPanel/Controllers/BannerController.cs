@@ -24,7 +24,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult bannerEkle(banner bnr, HttpPostedFileBase file)
+        public ActionResult bannerEkle(banner bnr, HttpPostedFileBase file, HttpPostedFileBase flash)
         {
             try
             {
@@ -56,6 +56,12 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
                         bnr.bannerPath = "/images/bannerPictures/" + newName;
                         bnr.bannerAlt = file.FileName;
+                        if (flash != null)
+                        {
+                            bnr.onBannerFlashPath = resimEkle(flash, HttpContext, "/images/bannerPictures/flash");
+
+                        }
+                        
 
                         bool result = _banner.add(bnr);
                         Session["bannerEklenemedi"] = "";
@@ -95,6 +101,52 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                 return RedirectToAction("index", "Banner", new { area = "AdminPanel" });
             }
 
+        }
+        public ActionResult bannerDuzenle(int? id)
+        {
+            if (id.HasValue)
+            {
+                return View(_banner.getOne(id.Value));
+            }
+            else
+                return RedirectToAction("index");
+        }
+       [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult bannerDuzenle(banner bnr, HttpPostedFileBase file, HttpPostedFileBase flash)
+        {
+            if (ModelState.IsValid)
+            {
+                banner changeBanner = _banner.getOne(bnr.id);
+                if (changeBanner != null)
+                {
+                    if (flash != null)
+                    {
+                        if (System.IO.File.Exists(Server.MapPath(changeBanner.onBannerFlashPath)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(changeBanner.onBannerFlashPath));
+                        }
+                        changeBanner.onBannerFlashPath = resimEkle(flash, HttpContext, "/images/bannerPictures/flash");
+
+                    }
+                    if (file != null)
+                    {
+                        if (System.IO.File.Exists(Server.MapPath(changeBanner.bannerPath)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(changeBanner.bannerPath));
+                        }
+                        changeBanner.bannerPath = resimEkle(file, HttpContext, "/images/bannerPictures");
+                    }
+                    changeBanner.onBannerText = bnr.onBannerText;
+                    changeBanner.onBannerCaption = bnr.onBannerCaption;
+                    _banner.update(changeBanner);
+                    Session["bannerDuzenle"] = "Banner Başarıyla Düzenlendi";
+                    return RedirectToAction("bannerDuzenle", "Banner", new { area = "AdminPanel", id=changeBanner.id });
+                }
+                return View("bannerDuzenle");
+            }
+           
+            return View("bannerDuzenle");
         }
         public ActionResult bannerIconEkle(int? id)
         {
@@ -237,8 +289,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
             else
                 return null;
         }
-        
-
+      
         public int boxSil(int id)
         {
             bannerBoxInfo isExist = _bannerBoxInfo.getOne(id);
@@ -249,6 +300,53 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
             }
             if (isExist != null) { _bannerBoxInfo.delete(isExist); return 1; }else return 0; 
         }
+
+        //flash
+      
+       
+        public static string resimEkle(HttpPostedFileBase file, HttpContextBase Cbase,string url)
+        {
+ 
+                    if (file != null)
+                    {
+                        int iconWidth = settings.bannerFlash.Width;
+                        int iconHeight = settings.bannerFlash.Height;
+                        string iconnewName = "";
+                        if (file.FileName.Length > 10)
+                        {
+
+                            iconnewName = Path.GetFileNameWithoutExtension(file.FileName.Substring(0, 10)) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        }
+                        else
+                        {
+
+                            iconnewName = Path.GetFileNameWithoutExtension(file.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        }
+                        Image orjResimIcon = Image.FromStream(file.InputStream);
+                        Bitmap pictureDrawIcon = new Bitmap(orjResimIcon, iconWidth, iconHeight);
+                        if (Directory.Exists(Cbase.Server.MapPath(url)))
+                        {
+                            pictureDrawIcon.Save(Cbase.Server.MapPath(url + "/" + iconnewName));
+                        }
+
+
+                       string flashPath = url + "/" + iconnewName;
+                       
+
+                            return flashPath;
+                       
+
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                
+           
+
+
+        }
+
     }
 }
 

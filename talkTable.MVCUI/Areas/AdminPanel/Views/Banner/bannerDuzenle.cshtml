@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "bannerDuzenle";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_adminLayout.cshtml";
+}
+
+
+@using talkTable.Entities.Entities
+@model banner
+@if (Session["bannerDuzenle"] != null)
+{
+    string mesaj = (string)Session["bannerDuzenle"];
+
+
+    <div class="col-sm-12 kapat">
+
+        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-success">Başarılı</span> @mesaj
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        setTimeout(function () { $('.kapat').hide('slow'); }, 2000);
+    </script>
+    Session["bannerDuzenle"]=null;
+
+
+
+
+}
+
+
+<div class="alert"></div>
+@if (Model != null)
+{
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <form method="post" action="/AdminPanel/Banner/bannerDuzenle" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Banner</strong>
+                            </div>
+                            @Html.HiddenFor(m => m.id)
+                            <div class="card-body card-block ">
+                                <div class="form-group">
+                                    <label class=" form-control-label">Banner</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-image"></i></div>
+                                        <input class="form-control" type="file" name="file">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" form-control-label">Flash</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-image"></i></div>
+                                        <input class="form-control" type="file" name="flash">
+                                        <small>Banner üstüne resim ya da flash eklemek istiyorsanız buradan ekleyebilirsiniz.</small>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Banner Üstü Text</strong>
+                            </div>
+
+                            <div class="card-body card-block">
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Resim Üstü Yazı Manşet</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
+                                        <input class="form-control" type="text" name="onBannerCaption" value="@Model.onBannerCaption" maxlength="100">
+                                        @Html.ValidationMessageFor(m => m.onBannerCaption, "", new { @style = "color:red" })
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class=" form-control-label">Resim Üstü Yazı Makale</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="fa fa-file-archive-o"></i></div>
+                                        <textarea class="form-control" type="text" name="onBannerText" maxlength="250">@Model.onBannerText</textarea>
+
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.onBannerText, "", new { @style = "color:red" })
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <input id="bannerAdd" type="submit" class="btn btn-success" style="float: right" value="Kaydet" />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div><!--row end-->
+            </form>
+        </div><!-- .animated -->
+    </div>
+}
+else
+{
+    <div><h3 style="color:red; text-align:center"> Düzenlenmek İstenilen Banner Bulunamadı</h3></div>
+}
+
+
+

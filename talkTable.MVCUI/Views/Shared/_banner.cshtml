@@ -1,53 +1,90 @@
 ﻿@using talkTable.MVCUI.Models
 @using talkTable.Entities.Entities
 @model bannerModels
+
 <section class="slider" id="slider">
     <div class="home-slider-area">
         <div id="home-slider">
-            @foreach (banner bnr in Model.banners)
+            @if (Model.banners.Count > 0)
             {
-                <div class="slide slide1" style="background-image: url('@bnr.bannerPath');">
-                    <div class="container">
-                        <div class="slide-top">
-                            <div class="logo">
 
-                                <img src="@Model.site.logoPath" alt="talkTable" />
+                string className1 = "slide1";
+                string className2="slide-top";
+                foreach (banner bnr in Model.banners)
+                {
+
+                    if (bnr.onBannerFlashPath != null)
+                    {
+                        className1 = "slide2";
+                        className2 = "slide-left";
+            <style type="text/css">
+                        .@className1::after {
+                        position: absolute;
+                        bottom: 0;
+                        right: -120px;
+                        float:right;
+                            background-image: url('@bnr.onBannerFlashPath');
+                            background-repeat: no-repeat;
+                            background-size: 100% 100%;
+                        width: 600px;
+                        height: 700px;
+                        content: '';
+                        }
+
+                 .@className1 .container{
+              width:900px!important;
+                margin-left:20px;
+                position:fixed!important;
+                }
+            </style>
+                    }
+
+                    <div class="slide @className1" style="background-image: url('@bnr.bannerPath');">
+                        <div class="container">
+                            <div class="@className2">
+                                <div class="logo">
+
+                                    <img src="@Model.site.logoPath" alt="talkTable" />
+                                </div>
+                                <div class="title">
+                                    @bnr.onBannerCaption
+                                </div>
+                                <div class="text">
+                                    @bnr.onBannerText
+                                </div>
+                                <div class="btns">
+                                    <a href="#what" class="red go-anim">Detaylı Bilgi</a>
+                                    <a href="#contact" class="green go-anim">İletişime Geç</a>
+                                </div>
                             </div>
-                            <div class="title">
-                                @bnr.onBannerCaption
-                            </div>
-                            <div class="text" style="color: #ffffff;font-size: 22px;font-weight: normal;font-family: Open Sans; line-height: 28px;margin-top: 40px;">
-                               @bnr.onBannerText
-                            </div>
-                            <div class="btns" >
-                                <a href="#what" class="red go-anim">Detaylı Bilgi</a>
-                                <a href="#contact" class="green go-anim">İletişime Geç</a>
-                            </div>
-                        </div>
-                        <div class="slide-bottom" style="bottom:50px;position:fixed">
-                            <div class="list">
-                                @if (bnr.bannerBoxInfo.Any())
-                                {
-                                    foreach (bannerBoxInfo box in bnr.bannerBoxInfo)
+                            <div class="slide-bottom" style="bottom:50px;position:fixed">
+                                <div class="list">
+                                    @if (bnr.bannerBoxInfo.Any())
                                     {
-                                        <article>
-                                            <div class="artc-header">
-                                                <div class="icon"><img src="@box.boxIconPath" alt="@box.IconAlt"></div>
-                                                <div class="text">
-                                                   @box.boxInText
+                                        foreach (bannerBoxInfo box in bnr.bannerBoxInfo)
+                                        {
+                                            <article>
+                                                <div class="artc-header">
+                                                    <div class="icon"><img src="@box.boxIconPath" alt="@box.IconAlt"></div>
+                                                    <div class="text" >
+                                                        @box.boxInText
+                                                    </div>
+                                                    <div class="badge">@box.boxOnButtonValue</div>
                                                 </div>
-                                                <div class="badge">@box.boxOnButtonValue</div>
-                                            </div>
-                                        </article>
+                                            </article>
+                                        }
                                     }
-                                }
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
 
+                    </div>
+                 
+
+                    
+                }
+            }
         </div>
     </div>
 </section>

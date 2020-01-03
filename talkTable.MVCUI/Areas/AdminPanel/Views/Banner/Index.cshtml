@@ -69,13 +69,16 @@
 
 
                                     <img style="margin: 0;padding: 0; margin-bottom: 10px;" class="col-md-6" src="@bann.bannerPath" alt="@bann.bannerAlt" />
+                                    <a href="/AdminPanel/Banner/bannerDuzenle/@bann.id" style="color:white;" class="btn btn-warning" title="Banner Düzenle"><i class="fa fa-refresh" title="Banner Düzenle"></i></a>
+                                    <a href="/AdminPanel/Banner/bannerIconEkle/@bann.id" style="color:white" class="btn btn-success" title="Resim'e Makale Kutusu Ekle"><i class="fa fa-plus" title="Resme Makale Kutusu Ekle"></i></a>
 
-                                    <a href="/AdminPanel/Banner/bannerIconEkle/@bann.id" style="color:white" class="btn btn-success" title="Resim'e Makale Kutusu Ekle"><i class="fa fa-plus" title="Resme Makale Kutusu Ekle"></i>Ekle</a>
                                     @if (bann.bannerBoxInfo.Any())
                                     {
-                                        <a href="/AdminPanel/Banner/boxGetir/@bann.id" style="color:white" class="btn btn-success" title="Resim'in Makale Kutusunu Getir"><i class="fa fa-refresh" title="Resim'in Makale Kutusunu Getir"></i>Getir</a>
+                                        <a href="/AdminPanel/Banner/boxGetir/@bann.id" style="color:white" class="btn btn-success" title="Resim'in Makale Kutusunu Getir"><i class="fa fa-list" title="Resim'in Makale Kutusunu Getir"></i></a>
                                     }
+
                                     <br />
+
                                 </div>
                                     }
 
@@ -109,17 +112,22 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-image"></i></div>
                                     <input class="form-control" type="file" name="file">
-
                                 </div>
-                              
                             </div>
-
+                            <div class="form-group">
+                                <label class=" form-control-label">Flash</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-image"></i></div>
+                                    <input class="form-control" type="file" name="flash">
+                                    <small>Banner üstüne resim ya da flash eklemek istiyorsanız buradan ekleyebilirsiniz.</small>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class=" form-control-label">Resim Üstü Yazı Manşet</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-file-text"></i></div>
                                     <input class="form-control" type="text" name="onBannerCaption" maxlength="100">
-                                    @Html.ValidationMessage("onBannerCaption","",new { @style="color:red"})
+                                    @Html.ValidationMessage("onBannerCaption", "", new { @style = "color:red" })
                                 </div>
 
                             </div>
@@ -130,7 +138,7 @@
                                     <textarea class="form-control" type="text" name="onBannerText" maxlength="250"></textarea>
 
                                 </div>
-                                @Html.ValidationMessage("onBannerText","", new { @style = "color:red" })
+                                @Html.ValidationMessage("onBannerText", "", new { @style = "color:red" })
                             </div>
 
 

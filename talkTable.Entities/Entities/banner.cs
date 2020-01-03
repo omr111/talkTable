@@ -29,6 +29,9 @@ namespace talkTable.Entities.Entities
         [StringLength(50)]
         public string bannerAlt { get; set; }
 
+        [StringLength(150)]
+        public string onBannerFlashPath { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bannerBoxInfo> bannerBoxInfo { get; set; }
     }

@@ -31,8 +31,6 @@ namespace talkTable.Entities.Entities
         [StringLength(150)]
         public string stepText { get; set; }
 
-
-
         public virtual howIsWork howIsWork { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1089,6 +1089,7 @@
     <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIconGuncelle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIconEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIcon.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Banner\bannerDuzenle.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1415,6 +1416,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
+    <Folder Include="images\bannerPictures\flash\" />
     <Folder Include="images\bannerPictures\icons\" />
     <Folder Include="images\howIsWorkIcon\" />
     <Folder Include="images\howIsWorkPicture\" />

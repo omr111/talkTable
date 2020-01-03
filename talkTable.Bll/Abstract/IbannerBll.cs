@@ -13,5 +13,6 @@ namespace talkTable.Bll.Abstract
         banner getOne(int id);
         bool add(banner banner);
         bool delete(banner banner);
+        bool update(banner banner);
     }
 }

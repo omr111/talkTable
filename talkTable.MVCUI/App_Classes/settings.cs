@@ -10,6 +10,17 @@ namespace talkTable.MVCUI.App_Classes
     public class settings
     {
 
+        public static Size bannerFlash
+        {
+            get
+            {
+                Size sonuc = new Size();
+                sonuc.Width = Convert.ToInt32(ConfigurationManager.AppSettings["bannerFlashW"]);
+                sonuc.Height = Convert.ToInt32(ConfigurationManager.AppSettings["bannerFlashH"]);
+                return sonuc;
+            }
+
+        }
         public static Size howIsWorkIcon
         {
             get
