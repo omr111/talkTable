@@ -53,5 +53,8 @@ namespace talkTable.Entities.Entities
 
         [StringLength(250)]
         public string sendMailSubText { get; set; }
+
+        [StringLength(15)]
+        public string password { get; set; }
     }
 }

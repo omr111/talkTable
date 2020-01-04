@@ -13,6 +13,7 @@ using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class KullanimAlanlariController : Controller
     {
         IusingAreaBll _usingArea = new usingAreaBll(new usingAreaDal());

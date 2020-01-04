@@ -10,15 +10,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Moneymo - Yeni Nesil Alışveriş Entegratörü</title>
+    <title>TalkTable | Yeni Nesil Alışveriş Entegratörü</title>
     <meta name="keywords" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce">
-
-
+    <meta name="description" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce" />
+    <meta name="robots" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce">
+    <meta name="googlebot" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce">
     <link href="/context/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/context/assets/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/context/assets/css/animate.min.css" rel="stylesheet" />
     <link href="/context/assets/css/aos.css" rel="stylesheet" />
     <link href="/context/assets/css/style.css" rel="stylesheet" />
+    @RenderSection("fav",false)
 </head>
 <body>
     <div class="overflow"></div>
@@ -27,7 +29,7 @@
         <div class="menu">
             <ul>
                 <li class="go-section"><a href="#slider">Anasayfa</a></li>
-                <li class="go-section"><a href="#what">Moneymo Nedir?</a></li>
+                <li class="go-section"><a href="#what">TalkTable Nedir?</a></li>
                 <li class="go-section"><a href="#how">Nasıl Çalışır?</a></li>
                 <li class="go-section"><a href="#services">Kullanım alanları</a></li>
                 <li class="go-section"><a href="#customers">Paydaşlar</a></li>
@@ -38,16 +40,12 @@
     </div>
     <header>
         <div class="header">
-            <div class="logo">
-                <a href="#slider">
-                    <img src="context/assests/images/logo.png" alt="">
-                </a>
-            </div>
+            @RenderSection("logo",false)
             <div class="menu">
                 <div class="mobile-menu-btn"></div>
                 <div class="dv">
                     <ul>
-                        <li><a href="#what">Moneymo Nedir?</a></li>
+                        <li><a href="#what">TalkTable Nedir?</a></li>
                         <li><a href="#how">Nasıl Çalışır?</a></li>
                         <li><a href="#services">Kullanım alanları</a></li>
                         <li><a href="#customers">Paydaşlar</a></li>

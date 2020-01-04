@@ -120,8 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\css\bootstrap.min.css" />
+    <Content Include="Areas\AdminPanel\context\admin-panel\assets\css\main.css" />
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\css\style.css" />
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\css\table.css" />
+    <Content Include="Areas\AdminPanel\context\admin-panel\assets\css\util.css" />
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\js\dashboard.js" />
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\js\index.html" />
     <Content Include="Areas\AdminPanel\context\admin-panel\assets\js\init-scripts\chart-js\chartjs-init.js" />
@@ -696,6 +698,14 @@
     <Content Include="context\assets\js\main.js" />
     <Content Include="context\assets\js\sweetalert.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="images\basket-b.png" />
+    <Content Include="images\box-b.png" />
+    <Content Include="images\coffe-b.png" />
+    <Content Include="images\computer-b.png" />
+    <Content Include="images\map-marker-b.png" />
+    <Content Include="images\newspaper-b.png" />
+    <Content Include="images\paper-b.png" />
+    <Content Include="images\shopping-b.png" />
     <Content Include="images\usingAreaPicture\app1-a67c5204-f0fb-4c24-8e39-4cd8efbf6fba.jpg" />
     <Content Include="images\usingAreaPicture\app2-6065c845-fbd3-4fe3-8fdc-638279047c5c.jpg" />
     <Content Include="images\usingAreaPicture\app3-def40112-1d99-4f9f-b4a5-14e7f33d27c5.jpg" />
@@ -1090,6 +1100,7 @@
     <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIconEkle.cshtml" />
     <Content Include="Areas\AdminPanel\Views\NasilCalisir\nasilCalisirIcon.cshtml" />
     <Content Include="Areas\AdminPanel\Views\Banner\bannerDuzenle.cshtml" />
+    <Content Include="Areas\AdminPanel\Views\Giris\girisYap.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1176,6 +1187,7 @@
     <Compile Include="Areas\AdminPanel\AdminPanelAreaRegistration.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\AvantajlarController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\BannerController.cs" />
+    <Compile Include="Areas\AdminPanel\Controllers\GirisController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\KullanimAlanlariController.cs" />
     <Compile Include="Areas\AdminPanel\Controllers\NasilCalisirController.cs" />

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: AdminPanel/Home

@@ -14,27 +14,37 @@
 @Html.Partial("_talkTableTeam", Model.team)
 @Html.Partial("_sendMail", Model.site)
 @section footer{
-<footer class="no-menu">
-    <div class="container">
-        <div class="footer">
-            <div class="logo" data-aos="flip-left" data-aos-offset="-600">
-                <a href="#">
-                    <img src="context/context/assests/images/footer-logo.png" alt="">
-                </a>
-            </div>
+    <footer class="no-menu">
+        <div class="container">
+            <div class="footer">
+                <div class="logo" data-aos="flip-left" data-aos-offset="-600">
+                    <a href="#">
+                        <img src="@Model.site.logoPath" alt="talktable.net" width="175" height="75">
+                    </a>
+                </div>
 
-            <div class="socials" data-aos="flip-left" data-aos-offset="-400">
-                <ul>
-                    <li><a href="@Model.site.twitterUrl"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="@Model.site.faceUrl"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="@Model.site.instagramUrl"><i class="fa fa-instagram"></i></a></li>
-                </ul>
+                <div class="socials" data-aos="flip-left" data-aos-offset="-400">
+                    <ul>
+                        <li><a href="@Model.site.twitterUrl"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="@Model.site.faceUrl"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="@Model.site.instagramUrl"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+
             </div>
 
         </div>
-
-    </div>
-    <div class="author container" style="text-align:center;font-size:13px; color:white">Bilgisayar Mühendisi Ömer Çetinkaya | 0531 365 13 56</div>
-</footer>
+        <div class="author container" style="text-align:center;font-size:13px; color:white">Bilgisayar Mühendisi Ömer Çetinkaya | 0531 365 13 56</div>
+    </footer>
 }
 
+@section logo{
+    <div class="logo">
+        <a href="#slider">
+            <img src="@Model.site.logoPath" alt="talktable.net" width="178" height="75">
+        </a>
+    </div>
+}
+@section fav{
+    <link rel="shortcut icon" type="image/x-icon" href="@Model.site.logoPath">
+    }

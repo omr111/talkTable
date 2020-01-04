@@ -10,6 +10,7 @@ using talkTable.Entities.Entities;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class talkTableTakimController : Controller
     {
         ItalkTableTeamBll _team = new talkTableTeamBll(new talkTableTeamDal());

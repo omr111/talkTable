@@ -1,0 +1,151 @@
+﻿
+
+
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Giriş Sayfası</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/content/img/loginImg/icons/favicon.ico" />
+
+    <!--===============================================================================================-->
+
+    <link href="~/Areas/AdminPanel/context/admin-panel/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+
+    <link href="~/Areas/AdminPanel/context/admin-panel/assets/css/util.css" rel="stylesheet" />
+   
+    <link href="~/Areas/AdminPanel/context/admin-panel/assets/css/main.css" rel="stylesheet" />
+
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            @ViewBag.Mesaj
+                        </td>
+                    </tr>
+
+                </table>
+                <form action="/AdminPanel/Giris/girisYap" method="post" id="dur" class="login100-form validate-form">
+                    @Html.AntiForgeryToken()
+                    <div class="infoLogInUser col-md-12">
+                        @if (ViewData["logInError"] != null)
+                        {
+
+
+                            <div class="col-sm-12">
+
+                                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                                    <span class="badge badge-pill badge-success">Hata</span> @ViewData["logInError"].ToString()
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <span class="login100-form-title p-b-34">
+                        Hesap Giriş
+                    </span>
+                    <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+                        <input id="first-name" class="input100" type="text" name="emailAddress" required="required" maxlength="70" placeholder="Email Adres...">
+                        <span class="focus-input100"></span>
+                    </div>
+
+
+                    <div class="wrap-input100 rs2-wrap-input100 validate-inp ut m-b-20" data-validate="Type password">
+                        <input class="input100" type="password" name="loginPassword" maxlength="15" required="required" placeholder="Şifre...">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
+                            Giriş Yap
+                        </button>
+                    </div>
+
+
+                    <div class="w-full text-center p-t-27 p-b-239">
+                        <span class="txt1">
+                            Unuttun
+                        </span>
+
+                        <a id="forgetPass" href="javascript:void(0)" class="txt2">
+                            Kullanıcı Adı / Şifre ?
+                        </a>
+
+
+                        <div class="form-group">
+
+                            <input id="changeName" class="form-control" disabled="disabled" type="text" name="changeName" placeholder="Kullanıcı Adınız..." style="width: 400px;">
+
+                        </div>
+
+                        <div class="form-group" style="margin-top:20px; float:left;">
+                            <button id="resetButton" type="button" class="btn btn-success" disabled="disabled"> Resetle</button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+               
+                    <div class="login100-more" style="background-image: url('/context/assets/images/phone3-full.png'); ">
+
+               
+
+            </div>
+
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Areas/AdminPanel/context/admin-panel/assets/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        $("#forgetPass").click(function () {
+
+
+            $("#changeName").prop("disabled", null);
+            $("#resetButton").prop("disabled", null);
+
+
+            $("#resetButton").click(function () {
+                var name = $("#changeName").val();
+
+
+                $.ajax({
+                    url: "/AdminPanel/Giris/SifreSıfırla",
+                    type: "POST",
+                    data: { changeName: name },
+                    success: function (data) {
+                        alert(data);
+                        document.location.replace("/AdminPanel/Giris/girisYap");
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                });
+            });
+
+
+
+        });
+    </script>
+
+
+
+
+</body>
+</html>
+

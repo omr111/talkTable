@@ -10,6 +10,7 @@ using talkTable.Entities.Entities;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class AvantajlarController : Controller
     {
         IwhatIsAdvantageBll advantageBll = new whatIsAdvantageBll(new whatIsAdvantageDal());

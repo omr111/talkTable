@@ -13,6 +13,7 @@ using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class TakimListesiController : Controller
     {
         IteamMemberBll _member = new teamMemberBll(new teamMemberDal());

@@ -14,6 +14,7 @@ using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class siteBilgileriController : Controller
     {
         IsiteInformationBll _site = new siteInformationBll(new siteInformationDal());

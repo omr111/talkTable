@@ -17,7 +17,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel
             context.MapRoute(
                 "AdminPanel_default",
                 "AdminPanel/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { Controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

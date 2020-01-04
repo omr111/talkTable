@@ -13,6 +13,7 @@ using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
+    [Authorize]
     public class ServislerController : Controller
     {
         IvalidityBll _service = new validityBll(new validityDal());
