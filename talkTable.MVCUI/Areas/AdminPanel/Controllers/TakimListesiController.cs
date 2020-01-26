@@ -25,7 +25,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult UyeEkle()
         {
             teamMember teamMember = new teamMember();
-            teamMember.talkTableTeamId = 1;
+            teamMember.talkTableTeamId = settings.talkTableTeam;
             return View(teamMember);
         }
         [ValidateAntiForgeryToken]

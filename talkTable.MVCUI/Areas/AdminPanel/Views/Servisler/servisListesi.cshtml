@@ -79,7 +79,7 @@ else
                 var deleteMember = $(this).closest(".deleteMember");
 
                 $.ajax({
-                    url: "/AdminPanel/Servisler/ServisSil",
+                    url: "/AdminPanel/Servisler/altServisSil",
                     data: { id: id },
                     type: "POST",
                     success: function (data) {

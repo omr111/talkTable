@@ -33,7 +33,7 @@ namespace talkTable.Entities.Entities
         [StringLength(15)]
         public string emailPassword { get; set; }
 
-        [StringLength(11)]
+        [StringLength(12)]
         public string phone { get; set; }
 
         [StringLength(100)]
@@ -56,5 +56,8 @@ namespace talkTable.Entities.Entities
 
         [StringLength(15)]
         public string password { get; set; }
+
+        [StringLength(250)]
+        public string videoPath { get; set; }
     }
 }

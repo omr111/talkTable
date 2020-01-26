@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 using System.Web.Mvc;
 using talkTable.Bll.Abstract;
 using talkTable.Bll.Concrete;
 using talkTable.Dal.Concrete;
 using talkTable.Entities.Entities;
+using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
@@ -18,7 +17,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult Index()
         {
      
-            return View(_team.getOne(1));
+            return View(_team.getOne(settings.talkTableTeam));
         }
         [ValidateAntiForgeryToken]
         [HttpPost]

@@ -4,15 +4,18 @@
 
 <section class="slider" id="slider">
     <div class="home-slider-area">
-        <div id="home-slider">
+        <div id="home-slider" >
             @if (Model.banners.Count > 0)
             {
 
-                string className1 = "slide1";
-                string className2="slide-top";
+
+                string className1;
+                string className2;
                 foreach (banner bnr in Model.banners)
                 {
 
+                     className1 = "slide1";
+                     className2 = "slide-top";
                     if (bnr.onBannerFlashPath != null)
                     {
                         className1 = "slide2";
@@ -20,31 +23,31 @@
             <style type="text/css">
                         .@className1::after {
                         position: absolute;
-                        bottom: 0;
-                        right: -120px;
+                        top:177px;
+               right:0;
+               
                         float:right;
                             background-image: url('@bnr.onBannerFlashPath');
                             background-repeat: no-repeat;
                             background-size: 100% 100%;
                         width: 600px;
-                        height: 700px;
+                        height: 600px;
                         content: '';
                         }
 
                  .@className1 .container{
-              width:900px!important;
-                margin-left:20px;
-                position:fixed!important;
+
+                
                 }
             </style>
                     }
 
                     <div class="slide @className1" style="background-image: url('@bnr.bannerPath');">
-                        <div class="container">
+                        <div class="container" style="margin-top:-50px!important;" >
                             <div class="@className2">
                                 <div class="logo">
 
-                                    <img src="@Model.site.logoPath" alt="talkTable" />
+                                    <img src="@Model.site.logoPath" alt="talktable.net"  />
                                 </div>
                                 <div class="title">
                                     @bnr.onBannerCaption
@@ -52,18 +55,18 @@
                                 <div class="text">
                                     @bnr.onBannerText
                                 </div>
-                                <div class="btns">
+                                @*<div class="btns">
                                     <a href="#what" class="red go-anim">Detaylı Bilgi</a>
                                     <a href="#contact" class="green go-anim">İletişime Geç</a>
-                                </div>
+                                </div>*@
                             </div>
-                            <div class="slide-bottom" style="bottom:50px;position:fixed">
+                            <div class="slide-bottom">
                                 <div class="list">
                                     @if (bnr.bannerBoxInfo.Any())
                                     {
                                         foreach (bannerBoxInfo box in bnr.bannerBoxInfo)
                                         {
-                                            <article>
+                                            <article >
                                                 <div class="artc-header">
                                                     <div class="icon"><img src="@box.boxIconPath" alt="@box.IconAlt"></div>
                                                     <div class="text" >

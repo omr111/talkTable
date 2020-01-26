@@ -21,7 +21,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         // GET: AdminPanel/Servisler
         public ActionResult Index()
         {
-            return View(_service.getOne(1));
+            return View(_service.getOne(settings.service));
         }
         
         [ValidateAntiForgeryToken]
@@ -79,7 +79,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult altServisEkle()
         {
             validitySection section = new validitySection();
-            section.validityId = 1;
+            section.validityId = settings.service;
             return View(section);
         }
         [ValidateAntiForgeryToken]

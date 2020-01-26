@@ -23,7 +23,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult Index()
         {
 
-            return View(_how.getOne(1));
+            return View(_how.getOne(settings.how));
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,7 +52,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult nasilCalisirAdimlariEkle(int id)
         {
             howIsWorkStep steps = new howIsWorkStep();
-            steps.howIsWorkId = 1;
+            steps.howIsWorkId = settings.how;
             return View(steps);
         }
 
@@ -62,7 +62,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         {
             if (ModelState.IsValid)
             {
-                step.howIsWorkId = 1;
+                step.howIsWorkId = settings.how;
                 _step.add(step);
                 Session["bannerEklenemedi"] = "Adım Başarıyla Eklendi";
                 return RedirectToAction("NasilCalisirAdimlari", "NasilCalisir", new { area = "AdminPanel" });
@@ -120,7 +120,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult nasilCalisirResimEkle()
         {
             howIsWorkPicture work = new howIsWorkPicture();
-            work.howIsWorkId = 1;
+            work.howIsWorkId = settings.how;
             return View(work);
         }
         [ValidateAntiForgeryToken]

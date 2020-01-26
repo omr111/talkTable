@@ -29,7 +29,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult kullanimAlanlari()
         {
             ViewBag.kullanimAlanlari = _areaInfo.getAll();
-            return View(_usingArea.getOne(1));
+            return View(_usingArea.getOne(settings.usingArea));
         }
        
         [HttpPost]
@@ -59,7 +59,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         {
             if (ModelState.IsValid)
             {
-                info.usingAreaId = 1;
+                info.usingAreaId = settings.usingArea;
                     
                 _areaInfo.add(info);
                 return 1;
@@ -135,7 +135,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     usingAreaPicture bnr = new usingAreaPicture();
                     bnr.picturePath = "/images/usingAreaPicture/" + newName;
                     bnr.pictureAlt = file.FileName;
-                    bnr.usingAreaId=1;
+                    bnr.usingAreaId=settings.usingArea;
                     bool result = _picture.addPicture(bnr);
                     Session["bannerEklenemedi"] = "";
                     if (result)

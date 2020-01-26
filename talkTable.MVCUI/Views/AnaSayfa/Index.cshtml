@@ -7,12 +7,14 @@
 
 @Html.Partial("_banner", @Model.banner)
 @Html.Partial("_InformationPartOfWhat", Model.site)
+
 @Html.Partial("_howIsWork", Model.how)
 @Html.Partial("_usingArea", Model.area)
 @Html.Partial("_advantage", Model.advantage)
 @Html.Partial("_validity", Model.service)
 @Html.Partial("_talkTableTeam", Model.team)
 @Html.Partial("_sendMail", Model.site)
+
 @section footer{
     <footer class="no-menu">
         <div class="container">
@@ -41,10 +43,94 @@
 @section logo{
     <div class="logo">
         <a href="#slider">
-            <img src="@Model.site.logoPath" alt="talktable.net" width="178" height="75">
+            <img src="@Model.site.logoPath" alt="talktable.net" width="178" height="60">
         </a>
     </div>
 }
 @section fav{
-    <link rel="shortcut icon" type="image/x-icon" href="@Model.site.logoPath">
-    }
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/fav.ico">
+}
+@section fastContact{
+    <div class="dropdown" style="position: fixed;
+                bottom: 50px;
+                right: 20px;">
+        <button class="mainmenubtn">Hızlı Erişim</button>
+        <div class="dropdown-child">
+            <a href="https://wa.me/@Model.site.phone" target="_blank">
+
+                <img src="~/images/waLogo.png" /><span>WhatsApp'tan Yazın</span>
+            </a>
+
+            <a href="#contact">
+                <img src="~/images/mail.png" />
+                <span>Mail Gönderin</span>
+            </a>
+
+        </div>
+    </div>
+    <style type="text/css">
+        .mainmenubtn {
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 70px;
+            font-weight: 800;
+        }
+
+            .mainmenubtn:hover {
+                background-color: #7ab140;
+            }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-child {
+            display: none;
+            background-color: black;
+            min-width: 200px;
+            width: 300px;
+            height: auto;
+            position: fixed;
+            bottom: 105px;
+            right: 20px;
+            z-index: 99;
+            background: white;
+            -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.31);
+            box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.31);
+            border-radius: 10px;
+        }
+
+            .dropdown-child a {
+                color: black;
+                padding: 15px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-child a:hover {
+                    background: rgba( 0,0,0,0.3);
+                }
+
+                .dropdown-child a span {
+                    margin-left: 10px;
+                    top: 20px;
+                    font-size: 20px;
+                }
+
+                .dropdown-child a img {
+                    width: 30px;
+                    height: 30px;
+                    left: 0;
+                    float: left;
+                }
+
+        .dropdown:hover .dropdown-child {
+            display: block;
+        }
+    </style>
+}

@@ -1,15 +1,16 @@
 ﻿
-
-
 @{
     Layout = null;
 }
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <title>Giriş Sayfası</title>
+    <title>Hesap Kurtarma</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -39,7 +40,7 @@
                     </tr>
 
                 </table>
-                <form action="/AdminPanel/Giris/girisYap" method="post" id="dur" class="login100-form validate-form">
+                <form action="/AdminPanel/Giris/SifreSifirla" method="post" id="dur" class="login100-form validate-form" onsubmit="false">
                     @Html.AntiForgeryToken()
                     <div class="infoLogInUser col-md-12">
                         @if (ViewData["logInError"] != null)
@@ -56,35 +57,28 @@
                         }
                     </div>
                     <span class="login100-form-title p-b-34">
-                        Hesap Giriş
+                        Hesap Kurtarma
                     </span>
                     <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
-                        <input id="first-name" class="input100" type="text" name="emailAddress" required="required" maxlength="70" placeholder="Email Adres...">
+                        <input id="emailAd" class="input100" type="text" name="emailAddress" required="required" maxlength="70" placeholder="Email Adres...">
                         <span class="focus-input100"></span>
                     </div>
 
 
-                    <div class="wrap-input100 rs2-wrap-input100 validate-inp ut m-b-20" data-validate="Type password">
-                        <input class="input100" type="password" name="loginPassword" maxlength="15" required="required" placeholder="Şifre...">
-                        <span class="focus-input100"></span>
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <button type="submit" class="login100-form-btn">
-                            Giriş Yap
+                    <div class="container-login100-form-btn" style="margin-bottom:20px;">
+                        <button id="resetButton" type="submit" class="login100-form-btn">
+                            Şifre Sıfırla
                         </button>
                     </div>
 
-
-                    <div class="w-full text-center p-t-27 p-b-239">
-                        <span class="txt1">
-                            Unuttun
-                        </span>
-                        <a id="forgetPass" href="/AdminPanel/Giris/SifreSifirla" class="txt2" data-toggle="modal" data-target=".rollerCagirModal">
-                            Kullanıcı Adı / Şifre ?
+                    <div class="container-login100-form-btn">
+                        <a href="/AdminPanel/Giris/GirisYap" class="login100-form-btn">
+                            Giriş Sayfasına Dön
                         </a>
-
                     </div>
+
+
+
 
                 </form>
 
@@ -98,7 +92,32 @@
 
             </div>
         </div>
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Areas/AdminPanel/context/admin-panel/assets/js/jquery.unobtrusive-ajax.min.js"></script>
+        <script type="text/javascript">
+            $("#dur").submit(function (e) {
+                e.preventDefault();
+                var name = $("#emailAd").val();
 
+                    $.ajax({
+                        url: "/AdminPanel/Giris/SifreSifirla",
+                        type: "POST",
+                        data: { changeName: name },
+                        success: function (data) {
+                            alert(data);
+                            setTimeout(function () { document.location.replace("/AdminPanel/Giris/GirisYap") }, 2000);
+
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+
+
+
+
+            });
+        </script>
 
 
 
@@ -106,4 +125,3 @@
 </body>
 </html>
 
-<!-- sdasdasdads-->

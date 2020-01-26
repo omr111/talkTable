@@ -7,6 +7,7 @@ using talkTable.Bll.Abstract;
 using talkTable.Bll.Concrete;
 using talkTable.Dal.Concrete;
 using talkTable.Entities.Entities;
+using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
@@ -18,7 +19,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         public ActionResult Index()
         {
 
-            return View(advantageBll.getOne(1));
+            return View(advantageBll.getOne(settings.avantageId));
         }
         [ValidateAntiForgeryToken]
         [HttpPost]

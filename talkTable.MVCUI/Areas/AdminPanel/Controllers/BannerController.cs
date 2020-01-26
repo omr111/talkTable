@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ImageResizer;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -59,10 +61,36 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         bnr.bannerAlt = file.FileName;
                         if (flash != null)
                         {
-                            bnr.onBannerFlashPath = resimEkle(flash, HttpContext, "/images/bannerPictures/flash");
+
+
+                            int iconWidth = settings.bannerFlash.Width;
+                            int iconHeight = settings.bannerFlash.Height;
+                            string iconnewName = "";
+                            if (flash.FileName.Length > 10)
+                            {
+
+                                iconnewName = Path.GetFileNameWithoutExtension(flash.FileName.Substring(0, 9)) + Guid.NewGuid() + Path.GetExtension(flash.FileName);
+                            }
+                            else
+                            {
+
+                                iconnewName = Path.GetFileNameWithoutExtension(flash.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(flash.FileName);
+                            }
+                            var combine = Path.Combine(Server.MapPath("/images/bannerPictures/flash"), iconnewName);
+                            if (Directory.Exists(Server.MapPath("/images/bannerPictures/flash")))
+                            {
+
+                                flash.SaveAs(combine);
+
+
+                            }
+
+
+
+                            bnr.onBannerFlashPath = "/images/bannerPictures/flash/" + iconnewName;
+
 
                         }
-                        
 
                         bool result = _banner.add(bnr);
                         Session["bannerEklenemedi"] = "";
@@ -127,7 +155,33 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         {
                             System.IO.File.Delete(Server.MapPath(changeBanner.onBannerFlashPath));
                         }
-                        changeBanner.onBannerFlashPath = resimEkle(flash, HttpContext, "/images/bannerPictures/flash");
+                        int iconWidth = settings.bannerFlash.Width;
+                        int iconHeight = settings.bannerFlash.Height;
+                        string iconnewName = "";
+                        if (flash.FileName.Length > 10)
+                        {
+
+                            iconnewName = Path.GetFileNameWithoutExtension(flash.FileName.Substring(0, 9)) + Guid.NewGuid() + Path.GetExtension(flash.FileName);
+                        }
+                        else
+                        {
+
+                            iconnewName = Path.GetFileNameWithoutExtension(flash.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(flash.FileName);
+                        }
+                       
+                     
+                        var combine = Path.Combine(Server.MapPath("/images/bannerPictures/flash"), iconnewName);
+                        if (Directory.Exists(Server.MapPath("/images/bannerPictures/flash")))
+                        {
+                           
+                            flash.SaveAs(combine);
+                           
+
+                        }
+
+
+                        
+                        changeBanner.onBannerFlashPath = "/images/bannerPictures/flash/"+iconnewName;
 
                     }
                     if (file != null)
@@ -235,28 +289,43 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
             try
             {
                 banner bnr = _banner.getOne(id);
+                bool resultDeleteBanner;
                 if (bnr != null)
                 {
-                    if (System.IO.File.Exists(Server.MapPath(bnr.bannerPath)))
-                    {
-                        System.IO.File.Delete(Server.MapPath(bnr.bannerPath));
-
-                    }
                     if (bnr.bannerBoxInfo.Any())
                     {
-                        foreach (var item in bnr.bannerBoxInfo)
+                        List<bannerBoxInfo> boxes=_bannerBoxInfo.getAllByBannerId(bnr.id);
+                        foreach (var item in boxes)
                         {
+                            _bannerBoxInfo.delete(item);
                             if (System.IO.File.Exists(Server.MapPath(item.boxIconPath)))
                             {
                                 System.IO.File.Delete(Server.MapPath(item.boxIconPath));
 
                             }
-                            _bannerBoxInfo.delete(item);
+                         
                         }
-                       
+                        banner bnr1 = _banner.getOne(id);//ilişkili veriler silindikten sonra veri uyuşmazlığı olduğu için hata veriyor. O yüzden veri yeniledim.
+                        resultDeleteBanner= _banner.delete(bnr1);
+                        if (System.IO.File.Exists(Server.MapPath(bnr1.bannerPath)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(bnr1.bannerPath));
+
+                        }
                     }
+                    else
+                    {
+                        resultDeleteBanner = _banner.delete(bnr);
+                        if (System.IO.File.Exists(Server.MapPath(bnr.bannerPath)))
+                        {
+                            System.IO.File.Delete(Server.MapPath(bnr.bannerPath));
+
+                        }
+                    }
+                    
                    
-                    bool resultDeleteBanner = _banner.delete(bnr);
+                   
+                   
 
                     if (resultDeleteBanner)
                     {
@@ -316,7 +385,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         if (file.FileName.Length > 10)
                         {
 
-                            iconnewName = Path.GetFileNameWithoutExtension(file.FileName.Substring(0, 10)) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            iconnewName = Path.GetFileNameWithoutExtension(file.FileName.Substring(0, 9)) + Guid.NewGuid() + Path.GetExtension(file.FileName);
                         }
                         else
                         {
@@ -328,6 +397,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                         if (Directory.Exists(Cbase.Server.MapPath(url)))
                         {
                             pictureDrawIcon.Save(Cbase.Server.MapPath(url + "/" + iconnewName));
+                    
                         }
 
 
@@ -362,70 +432,3 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 
 
 
-//[HttpPost]
-//public ActionResult boxGuncelle(bannerBoxInfo box, HttpPostedFileBase bannerIcon)
-//{
-//    try
-//    {
-//        if (ModelState.IsValid)
-//        {
-//            bannerBoxInfo boxChange = _bannerBoxInfo.getOne(box.id);
-//            if (bannerIcon != null)
-//            {
-//                if (System.IO.File.Exists(Server.MapPath(box.boxIconPath)))
-//                {
-//                    System.IO.File.Delete(Server.MapPath(box.boxIconPath));
-
-//                }
-
-//                int iconWidth = settings.logoIcon.Width;
-//                int iconHeight = settings.logoIcon.Height;
-//                string iconnewName = "";
-//                if (bannerIcon.FileName.Length > 10)
-//                {
-
-//                    iconnewName = Path.GetFileNameWithoutExtension(bannerIcon.FileName.Substring(0, 10)) + Guid.NewGuid() + Path.GetExtension(bannerIcon.FileName);
-//                }
-//                else
-//                {
-
-//                    iconnewName = Path.GetFileNameWithoutExtension(bannerIcon.FileName) + "-" + Guid.NewGuid() + Path.GetExtension(bannerIcon.FileName);
-//                }
-//                Image orjResimIcon = Image.FromStream(bannerIcon.InputStream);
-//                Bitmap pictureDrawIcon = new Bitmap(orjResimIcon, iconWidth, iconHeight);
-//                if (Directory.Exists(Server.MapPath("/images/bannerPictures/icons")))
-//                {
-//                    pictureDrawIcon.Save(Server.MapPath("/images/bannerPictures/icons/" + iconnewName));
-//                }
-
-
-//                boxChange.boxIconPath = "/images/bannerPictures/icons/" + iconnewName;
-//                boxChange.boxIconPath = bannerIcon.FileName;
-
-//            }
-//            boxChange.boxInText = box.boxInText;
-//            boxChange.boxOnButtonValue = box.boxOnButtonValue;
-//            bool update = _bannerBoxInfo.update(boxChange);
-//            if (update)
-//            {
-//                Session["bannerEklenemedi"] = "Başarıyla Güncellendi";
-//                return RedirectToAction("index", "Banner", new { area = "AdminPanel" });
-//            }
-//            else
-//            {
-//                Session["bannerEklenemedi"] = "Güncellenme Sırasında Bir Hata Meydana Geldi";
-//                return RedirectToAction("index", "Banner", new { area = "AdminPanel" });
-//            }
-//        }
-//        else
-//        {
-//            return View();
-//        }
-//    }
-//    catch (Exception e)
-//    {
-
-//        Session["bannerEklenemedi"] = e.Message;
-//        return RedirectToAction("index", "Banner", new { area = "AdminPanel" });
-//    }
-//}

@@ -7,6 +7,7 @@ using talkTable.Bll.Abstract;
 using talkTable.Bll.Concrete;
 using talkTable.Dal.Concrete;
 using talkTable.Entities.Entities;
+using talkTable.MVCUI.App_Classes;
 using talkTable.MVCUI.Models;
 
 namespace talkTable.MVCUI.Controllers
@@ -26,19 +27,20 @@ namespace talkTable.MVCUI.Controllers
             homeModels home = new homeModels();
             howIsWorkModel how = new howIsWorkModel();
             bannerModels bannerModel = new bannerModels();
-            siteInformation site = _site.getOne(1);
+            siteInformation site = _site.getOne(settings.siteInformation);
             List<banner> banner = _banner.getAll();
-            usingArea area = _usingArea.getOne(1);
-            whatIsAdvantage advantage = advantageBll.getOne(1);
-            validity service = _service.getOne(1);
-            talkTableTeam member = _member.getOne(1);
+            usingArea area = _usingArea.getOne(settings.usingArea);
+            whatIsAdvantage advantage = advantageBll.getOne(settings.avantageId);
+            validity service = _service.getOne(settings.service);
+            talkTableTeam member = _member.getOne(settings.talkTableTeam);
+            howIsWork howIsWork= _how.getOne(settings.how);
             bannerModel.banners = banner;
             bannerModel.site = site;
 
             how.site = site;
-            how.HowIsWork = _how.getOne(1);
+            how.HowIsWork = howIsWork;
 
-            home.how = _how.getOne(1);
+            home.how = howIsWork;
             home.banner = bannerModel;
             home.site = site;
             home.area = area;

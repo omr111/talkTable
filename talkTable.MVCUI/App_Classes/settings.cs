@@ -9,7 +9,72 @@ namespace talkTable.MVCUI.App_Classes
 {
     public class settings
     {
+        public static int avantageId
+        {
+            get
+            {
+                
+                int id= Convert.ToInt32(ConfigurationManager.AppSettings["avantageId"]);
+               
+                return id;
+            }
 
+        }
+        public static int usingArea
+        {
+            get
+            {
+
+                int id = Convert.ToInt32(ConfigurationManager.AppSettings["usingArea"]);
+
+                return id;
+            }
+
+        }
+        public static int how
+        {
+            get
+            {
+
+                int id = Convert.ToInt32(ConfigurationManager.AppSettings["how"]);
+
+                return id;
+            }
+
+        }
+        public static int service
+        {
+            get
+            {
+
+                int id = Convert.ToInt32(ConfigurationManager.AppSettings["service"]);
+
+                return id;
+            }
+
+        }
+        public static int siteInformation
+        {
+            get
+            {
+
+                int id = Convert.ToInt32(ConfigurationManager.AppSettings["siteInformation"]);
+
+                return id;
+            }
+
+        }
+        public static int talkTableTeam
+        {
+            get
+            {
+
+                int id = Convert.ToInt32(ConfigurationManager.AppSettings["talkTableTeam"]);
+
+                return id;
+            }
+
+        }
         public static Size bannerFlash
         {
             get

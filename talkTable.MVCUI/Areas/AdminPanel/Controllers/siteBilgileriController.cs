@@ -21,7 +21,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         // GET: AdminPanel/siteBilgileri
         public ActionResult Index()
         {
-            siteInformation site = _site.getOne(1);
+            siteInformation site = _site.getOne(settings.siteInformation);
             return View(site);
         }
         [ValidateAntiForgeryToken]
@@ -29,7 +29,7 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         [HttpPost]
         public ActionResult Index(siteInformation comInfo, HttpPostedFileBase file )
         {
-            siteInformation company = _site.getOne(1);
+            siteInformation company = _site.getOne(settings.siteInformation);
 
 
             try
@@ -80,13 +80,16 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                      company.emailPassword = comInfo.emailPassword;
                     company.emailAddress = comInfo.emailAddress;                   
                     company.address = comInfo.address;
+                    company.videoPath = comInfo.videoPath;
                  
                     bool result = _site.update(company);
                     //todo uyarı mesajları yapılacak.
                     if (result)
                     {
+                        Session["siteUpdate"] = "Site Bilgileri Güncellendi";
                         return RedirectToAction("Index", "siteBilgileri", new { area = "AdminPanel" });
                     }
+                    ViewData["siteUpdate"] = "Site Bilgileri Güncellenemedi";
                     return RedirectToAction("Index", "siteBilgileri", new { area = "AdminPanel" });
                 }
                 else

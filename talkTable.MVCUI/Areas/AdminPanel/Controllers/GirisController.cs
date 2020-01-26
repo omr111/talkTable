@@ -10,6 +10,7 @@ using talkTable.Bll.Abstract;
 using talkTable.Bll.Concrete;
 using talkTable.Dal.Concrete;
 using talkTable.Entities.Entities;
+using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
 {
@@ -19,26 +20,37 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
         // GET: AdminPanel/Giris
         public ActionResult Index()
         {
+          
             return View();
         }
         public ActionResult girisYap()
         {
-          
+         
             return View();
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult girisYap(string emailAddress,string loginPassword)
         {
-            if (ModelState.IsValid)
-            {
-                siteInformation isExistSite = _site.getOne(1);
-                if (isExistSite != null)
+           
+            
+                if (ModelState.IsValid)
                 {
-                    if (isExistSite.emailAddress == emailAddress && isExistSite.password == loginPassword)
+                    siteInformation isExistSite = _site.getOne(settings.siteInformation);
+                    if (isExistSite != null)
                     {
-                        FormsAuthentication.SetAuthCookie(isExistSite.emailAddress, false);
-                        return RedirectToAction("Index", "Home", new { area = "AdminPanel" });
+                        if (isExistSite.emailAddress == emailAddress && isExistSite.password == loginPassword)
+                        {
+                       
+                            FormsAuthentication.SetAuthCookie(isExistSite.emailAddress, false);
+                        
+                            return RedirectToAction("Index", "Home", new { area = "AdminPanel" });
+                        }
+                        else
+                        {
+                            ViewData["logInError"] = "Email ya da Şifre Yanlış!";
+                            return View("girisYap");
+                        }
                     }
                     else
                     {
@@ -47,13 +59,8 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     }
                 }
                 else
-                {
-                    ViewData["logInError"] = "Email ya da Şifre Yanlış!";
-                    return View("girisYap");
-                }
-            }
-            else
-            return View();
+                    return View();
+            
         }
 
         public ActionResult cikisYap()
@@ -61,17 +68,18 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("girisYap", "Giris", new { area = "AdminPanel" });
         }
+        public ActionResult SifreSifirla() { return View(); }
         [HttpPost]
-        public ActionResult SifreSıfırla(string changeName)
+        public ActionResult SifreSifirla(string changeName)
         {
             try
             {
 
-                siteInformation company = _site.getOne(1);
+                siteInformation company = _site.getOne(settings.siteInformation);
 
-                
 
-                if (company.emailAddress==changeName)
+
+                if (company.emailAddress == changeName)
                 {
                     Random random = new Random();
                     int sifreUret = random.Next(15689, 99586);
@@ -82,20 +90,20 @@ namespace talkTable.MVCUI.Areas.AdminPanel.Controllers
                     if (resultUpdate)
                     {
 
-                       
+
                         // mail adresi ve şifresi ne ise adminpanelden company information'dan mail ve şifreyi de aynısını yapmalı!
                         var senderEmail = new MailAddress(company.emailAddress.Trim(), "");
                         var receiverEmail = new MailAddress(company.emailAddress.Trim(), "Receiver");
 
                         var password = company.emailPassword.Trim();
-                        var sub = "TalkTable.Net Yeni Şifre";
+                        var sub = "cloudevi.io Yeni Şifre";
                         var body = string.Format("Yeni Şifreniz {0}", company.password);
-
+                        var HostSplit = company.emailAddress.Split('@')[1].ToString();
 
                         var smtp = new SmtpClient
                         {
                             Timeout = 10000,
-                            Host = "mail.talktable.net",
+                            Host = "mail." + HostSplit,
                             Port = 587,
                             EnableSsl = false,
                             DeliveryMethod = SmtpDeliveryMethod.Network,

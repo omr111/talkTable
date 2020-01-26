@@ -10,6 +10,7 @@ using talkTable.Bll.Abstract;
 using talkTable.Bll.Concrete;
 using talkTable.Dal.Concrete;
 using talkTable.Entities.Entities;
+using talkTable.MVCUI.App_Classes;
 
 namespace talkTable.MVCUI.Controllers
 {
@@ -17,9 +18,11 @@ namespace talkTable.MVCUI.Controllers
     {
         IsendMailBll _sendMail = new sendMailBll(new sendMailDal());
         IsiteInformationBll site = new siteInformationBll(new siteInformationDal());
+     
         // GET: mail
         public ActionResult Index()
         {
+           
             return View();
         }
         [ValidateAntiForgeryToken]
@@ -31,7 +34,7 @@ namespace talkTable.MVCUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    siteInformation company = site.getOne(1);
+                    siteInformation company = site.getOne(settings.siteInformation);
 
                     // mail adresi ve şifresi ne ise adminpanelden company information'dan mail ve şifreyi de aynısını yapmalı!
                     var senderEmail = new MailAddress(review.mailAddress.Trim(), "");

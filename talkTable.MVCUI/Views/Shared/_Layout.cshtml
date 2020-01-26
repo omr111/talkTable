@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TalkTable | Yeni Nesil Alışveriş Entegratörü</title>
+    <title>talktable.net | Yeni Nesil Alışveriş Entegratörü</title>
     <meta name="keywords" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce">
     <meta name="description" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce" />
     <meta name="robots" content="QR Code integrator,Shopping Integrator,Billboard, newpaper, magazine,Commerce Enabling Technology,Iot, E-Wallet, Bank Apps,Order, Pay,Campaign, Loyalty,Merchant, Store, E-Commerce, X-Commerce">
@@ -29,7 +29,7 @@
         <div class="menu">
             <ul>
                 <li class="go-section"><a href="#slider">Anasayfa</a></li>
-                <li class="go-section"><a href="#what">TalkTable Nedir?</a></li>
+                <li class="go-section"><a href="#what">talktable Nedir?</a></li>
                 <li class="go-section"><a href="#how">Nasıl Çalışır?</a></li>
                 <li class="go-section"><a href="#services">Kullanım alanları</a></li>
                 <li class="go-section"><a href="#customers">Paydaşlar</a></li>
@@ -40,19 +40,19 @@
     </div>
     <header>
         <div class="header">
-            @RenderSection("logo",false)
+            @RenderSection("logo", false)
             <div class="menu">
                 <div class="mobile-menu-btn"></div>
                 <div class="dv">
                     <ul>
-                        <li><a href="#what">TalkTable Nedir?</a></li>
+                        <li><a href="#what">talktable Nedir?</a></li>
                         <li><a href="#how">Nasıl Çalışır?</a></li>
                         <li><a href="#services">Kullanım alanları</a></li>
                         <li><a href="#customers">Paydaşlar</a></li>
                         <li><a href="#team">Biz Kimiz?</a></li>
                         <li><a href="#contact">İletişim</a></li>
                     </ul>
-                  
+
                 </div>
             </div>
         </div>
@@ -60,23 +60,18 @@
     <div class="main-container">
         @RenderBody()
 
-
-
-
-
-
-
-
-
+        
+        @RenderSection("fastContact", false)
     </div>
-    @RenderSection("footer", false);
 
-   
+    @RenderSection("footer", false)
+
+
     <script src="/context/assets/js/jquery-3.1.1.min.js"></script>
     <script src="/context/assets/js/bootstrap.min.js"></script>
-    <script src="/context/assets/js/jquery.bxslider.min.js"></script> 
+    <script src="/context/assets/js/jquery.bxslider.min.js"></script>
     <script src="/context/assets/js/aos.js"></script>
-    <script src="/context/assets/js/sweetalert.min.js"></script>  
+    <script src="/context/assets/js/sweetalert.min.js"></script>
     <script src="/context/assets/js/main.js"></script>
     <script>
         $(document).ready(function () {
@@ -87,16 +82,16 @@
             });
             AOS.refreshHard();
             $('#home-slider').bxSlider({
-                auto: true,
+                auto: false,
                 pause: 12000,
-                pager: true,
+                pager: false,
                 controls: true,
                 autoHover: true,
                 nextText: '<i class="fa fa-chevron-right"></i>',
                 prevText: '<i class="fa fa-chevron-left"></i>',
             });
             $('.services-list.slider').bxSlider({
-                auto: false,
+                auto: true,
                 pager: true,
                 controls: false,
             });
@@ -126,6 +121,8 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-116047309-1');</script>
+
+  
 </body>
 
 </html>
