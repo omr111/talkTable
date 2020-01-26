@@ -668,9 +668,13 @@
     <Content Include="images\logo\talktable74839e69f-8141-4300-90dc-e1eb97556441.png" />
     <Content Include="images\mail.png" />
     <Content Include="images\map-marker-b.png" />
+<<<<<<< HEAD
     <Content Include="images\memberPhoto\omerCetink5daaacad-8aef-446a-b000-7aadd95bc339.jpg" />
     <Content Include="images\mobile-menu-btn-icon-black.png" />
     <Content Include="images\mobile-menu-btn-icon.png" />
+=======
+    <Content Include="images\neden talktable-02.jpg" />
+>>>>>>> 4e108234d896cc41a21ddb880862fb27d1117260
     <Content Include="images\newspaper-b.png" />
     <Content Include="images\paper-b.png" />
     <Content Include="images\serviceBackground\phones-bg11eb9c43-de8d-41a1-add7-4214f071baf8.png" />
